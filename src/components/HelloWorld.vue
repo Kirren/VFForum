@@ -1,7 +1,7 @@
 <template>
   <div class="col-12">
     <div v-for="thread in threads">
-      <h1>{{thread.title}}</h1>
+      <b-jumbotron :header="thread.title"></b-jumbotron>
       <div class="container-fluid">
         <div v-for="postId in thread.posts" class="post row mb-4 py-3">
           <div class="user-info text-center col-3 col-xl-1">

@@ -1,113 +1,90 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div class="col-12">
+    <div v-for="thread in threads">
+      <h1>{{thread.title}}</h1>
+      <div class="container-fluid">
+        <div v-for="postId in thread.posts" class="post row mb-4 py-3">
+          <div class="user-info text-center col-3 col-xl-1">
+            <p>
+              <a href="#" class="user-name">
+                {{users[posts[postId].userId].name}}
+              </a>
+              <span class="online desktop-only">online</span>
+            </p>
+            <a href="#">
+              <b-img fluid
+                     rounded="circle"
+                     height="75"
+                     width="75"
+                     :src="users[posts[postId].userId].avatar"
+                     alt=""
+                     class="mb-2"/>
+            </a>
+            <p class="desktop-only mb-0">
+              <small>107 posts</small>
+              <br>
+              <small>23 threads</small>
+            </p>
+
+          </div>
+
+          <div class="post-content col-9 col-xl-11">
+            <div>
+              {{posts[postId].text}}
+            </div>
+            <a href="#"
+               style="margin-left: auto;"
+               class="link-unstyled"
+               title="Make a change">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <div class="post-date text-faded">
+              {{posts[postId].publishedAt}}
+            </div>
+
+            <div class="reactions float-right">
+              <ul class="list-inline">
+                <li class="list-inline-item">💡</li>
+                <li class="list-inline-item">❤</li>
+                <li class="list-inline-item">👎</li>
+                <li class="list-inline-item">👍</li>
+                <li class="list-inline-item">👌</li>
+              </ul>
+              <b-button size="sm" variant="outline-success">
+                <span class="emoji">❤</span>️ 3
+              </b-button>
+              <b-button size="sm" variant="outline-success" class="active-reaction">
+                <span class="emoji">👌️</span>️ 1
+              </b-button>
+              <b-button size="sm" variant="outline-success">
+                + <i class="fa fa-smile-o emoji"></i>
+              </b-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import sourceData from '@/data'
+
+  export default {
+    name: 'HelloWorld',
+    data () {
+      return {
+        threads: sourceData.threads,
+        users: sourceData.users,
+        posts: sourceData.posts
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style scoped lang="scss">
+  .post {
+    background-color: #fff;
+  }
 </style>

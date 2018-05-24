@@ -17,6 +17,6 @@
   @import '~bootstrap-vue/dist/bootstrap-vue.css';
 
   #app {
-    background-color: #b3d7ff;
+    background-color: #fff;
   }
 </style>

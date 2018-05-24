@@ -26,8 +26,12 @@
           <span v-else>thread</span>
         </small>
       </p>
-      <p class="post-date text-muted">
-        <small>{{post.publishedAt}}</small>
+      <!--<p class="post-date text-muted">
+        <small>{{post.publishedAt | date}}</small>
+      </p>-->
+      <p class="post-date text-muted"
+        :title="post.publishedAt | date">
+        <small>{{post.publishedAt | timeSince}}</small>
       </p>
     </div>
     <div class="post-content col-9 col-xl-11">
@@ -65,6 +69,7 @@
 
 <script>
   import sourceData from '@/data'
+  import moment from 'moment'
 
   export default {
     props: {
@@ -79,6 +84,14 @@
       },
       userPostsCount () {
         return Object.keys(this.user.posts).length
+      }
+    },
+    filters: {
+      date (d) {
+        return moment.unix(d).format('MMMM Do YYYY, h:mm:ss a')
+      },
+      timeSince (d) {
+        return moment.unix(d).fromNow()
       }
     }
   }

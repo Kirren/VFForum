@@ -13,9 +13,7 @@
   import ThreadListItem from './ThreadListItem'
 
   export default {
-    components: {
-      ThreadListItem
-    },
+    components: {ThreadListItem},
     props: {
       threads: {
         required: true,

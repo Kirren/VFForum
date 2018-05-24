@@ -1,8 +1,8 @@
 <template>
-  <div class="thread row">
+  <div class="thread row mb-4 py-3">
     <div class="col-10">
       <p>
-        <router-link :to="{name: 'ThreadShow', params: {id: thread['.key']}}">
+        <router-link :to="{name: 'ThreadPage', params: {id: thread['.key']}}">
           {{thread.title}}
         </router-link>
       </p>

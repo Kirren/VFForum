@@ -2,11 +2,11 @@
   <div id="app">
     <div class="container-fluid">
       <div class="row">
-        <!--<div class="col-12">
+        <div class="col-12">
           <div class="text-center">
             <img src="./assets/logo.png">
           </div>
-        </div>-->
+        </div>
         <router-view/>
       </div>
     </div>
@@ -24,6 +24,6 @@
   @import '~bootstrap-vue/dist/bootstrap-vue.css';
 
   #app {
-    background-color: beige;
+    background-color: #b3d7ff;
   }
 </style>

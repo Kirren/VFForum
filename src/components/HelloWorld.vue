@@ -21,7 +21,7 @@
                      class="mb-2"/>
             </a>
             <p class="desktop-only mb-0">
-              <small>107 posts</small>
+              <small>{{users[posts[postId].userId].length}}</small>
               <br>
               <small>23 threads</small>
             </p>
@@ -42,7 +42,7 @@
               {{posts[postId].publishedAt}}
             </div>
 
-            <div class="reactions float-right">
+            <div class="reactions float-right text-right">
               <ul class="list-inline">
                 <li class="list-inline-item">💡</li>
                 <li class="list-inline-item">❤</li>
@@ -84,7 +84,4 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  .post {
-    background-color: #fff;
-  }
 </style>

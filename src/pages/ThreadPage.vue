@@ -1,7 +1,6 @@
 <template>
   <div class="col-12">
     <h1>{{thread.title}}</h1>
-    <hr>
     <PostList :posts="posts"/>
     <PostEditor
       @save="addPost"

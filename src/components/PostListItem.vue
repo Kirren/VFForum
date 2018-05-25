@@ -30,7 +30,9 @@
         <small>{{post.publishedAt | date}}</small>
       </p>-->
       <p class="post-date text-muted">
-        <BaseDate :timestamp="post.publishedAt"/>
+        <small>
+          <BaseDate :timestamp="post.publishedAt"/>
+        </small>
       </p>
     </div>
     <div class="post-content col-9 col-xl-11">

@@ -29,9 +29,8 @@
       <!--<p class="post-date text-muted">
         <small>{{post.publishedAt | date}}</small>
       </p>-->
-      <p class="post-date text-muted"
-        :title="post.publishedAt | date">
-        <small>{{post.publishedAt | timeSince}}</small>
+      <p class="post-date text-muted">
+        <BaseDate :timestamp="post.publishedAt"/>
       </p>
     </div>
     <div class="post-content col-9 col-xl-11">
@@ -69,9 +68,12 @@
 
 <script>
   import sourceData from '@/data'
-  import moment from 'moment'
+  import BaseDate from './BaseDate'
 
   export default {
+    components: {
+      BaseDate
+    },
     props: {
       post: {
         required: true,
@@ -84,14 +86,6 @@
       },
       userPostsCount () {
         return Object.keys(this.user.posts).length
-      }
-    },
-    filters: {
-      date (d) {
-        return moment.unix(d).format('MMMM Do YYYY, h:mm:ss a')
-      },
-      timeSince (d) {
-        return moment.unix(d).fromNow()
       }
     }
   }

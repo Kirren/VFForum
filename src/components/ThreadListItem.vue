@@ -6,9 +6,9 @@
           {{thread.title}}
         </router-link>
       </p>
-      <p class="text-mute">
+      <p class="text-muted">
         <small>
-          By <a href="#">{{user.name}}</a>, {{thread.publishedAt}}.
+          By <a href="#">{{user.name}}</a>, <BaseDate :timestamp="thread.publishedAt"/>.
         </small>
       </p>
     </div>
@@ -35,8 +35,12 @@
 
 <script>
   import sourceData from '@/data'
+  import BaseDate from './BaseDate'
 
   export default {
+    components: {
+      BaseDate
+    },
     props: {
       thread: {
         required: true,
@@ -53,3 +57,11 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .thread {
+    background-color: honeydew;
+    border-right: 3px solid #f0f0f0;
+    border-bottom: 3px solid #f0f0f0;
+  }
+</style>

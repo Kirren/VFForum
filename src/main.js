@@ -3,9 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import BaseDate from '@/components/BaseDate'
+
 import BootstrapVue from 'bootstrap-vue'
 
 Vue.use(BootstrapVue)
+Vue.component('BaseDate', BaseDate)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

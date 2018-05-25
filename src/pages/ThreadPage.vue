@@ -1,6 +1,16 @@
 <template>
   <div class="col-12">
     <h1>{{thread.title}}</h1>
+    <div class="text-white">
+      <p>
+        <small class="float-left">By <a href="#" class="text-white">{{users[thread.userId].name}}</a>,
+          <BaseDate :timestamp="thread.publishedAt"/>
+          .
+        </small>
+        <small class="float-right">3 replies by 3 contributors</small>
+      </p>
+    </div>
+    <div class="mb-4 clearfix"></div>
     <PostList :posts="posts"/>
     <PostEditor
       @save="addPost"
@@ -26,7 +36,8 @@
     },
     data () {
       return {
-        thread: sourceData.threads[this.id]
+        thread: sourceData.threads[this.id],
+        users: sourceData.users
       }
     },
     computed: {

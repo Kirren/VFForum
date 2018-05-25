@@ -43,12 +43,8 @@
 
 <script>
   import sourceData from '@/data'
-  import BaseDate from './BaseDate'
 
   export default {
-    components: {
-      BaseDate
-    },
     props: {
       thread: {
         required: true,

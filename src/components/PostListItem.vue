@@ -1,6 +1,6 @@
 <template>
   <div class="post row mb-4 py-3">
-    <div class="user-info text-center col-3 col-xl-1">
+    <div class="user-info text-center col-3 col-md-2">
       <p class="mb-0">
         <a href="#" class="user-name">
           <strong>{{user.name}}</strong>
@@ -10,12 +10,11 @@
         <small class="online desktop-only">online</small>
       </p>
       <a href="#">
-        <b-img fluid
-               rounded="circle"
+        <b-img rounded="circle"
                height="75"
                width="75"
                :src="user.avatar"
-               alt=""
+               alt="user.name"
                class="mb-2"/>
       </a>
       <p class="desktop-only mb-0">
@@ -35,7 +34,7 @@
         </small>
       </p>
     </div>
-    <div class="post-content col-9 col-xl-11">
+    <div class="post-content col-9 col-md-10">
       <div>
         <p>
           <small>{{post.text}}</small>
@@ -70,12 +69,8 @@
 
 <script>
   import sourceData from '@/data'
-  import BaseDate from './BaseDate'
 
   export default {
-    components: {
-      BaseDate
-    },
     props: {
       post: {
         required: true,
@@ -98,8 +93,5 @@
     background-color: honeydew;
     border-right: 3px solid #f0f0f0;
     border-bottom: 3px solid #f0f0f0;
-    .user-name {
-      color: #57AD8D;
-    }
   }
 </style>

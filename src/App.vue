@@ -22,5 +22,8 @@
       color: #FFF;
       margin: 1.5rem 0 3rem;
     }
+    .user-name {
+      color: #57AD8D;
+    }
   }
 </style>

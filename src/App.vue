@@ -12,11 +12,14 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   @import '~bootstrap/dist/css/bootstrap.css';
   @import '~bootstrap-vue/dist/bootstrap-vue.css';
 
   #app {
     background-color: #fff;
+    a {
+      color: #57AD8D;
+    }
   }
 </style>

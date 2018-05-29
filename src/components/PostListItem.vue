@@ -41,7 +41,8 @@
       <a href="#"
          class="ml-auto"
          title="Make a change">
-        <FontAwesome></FontAwesome>
+        <icon name="pencil-alt"
+              scale="2" class="text-warning"/>
       </a>
       <div class="reactions float-right text-right">
         <ul class="list-inline">

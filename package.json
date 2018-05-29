@@ -16,6 +16,7 @@
     "moment": "^2.22.1",
     "tunnel-agent": "^0.6.0",
     "vue": "^2.5.2",
+    "vue-awesome": "^3.0.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

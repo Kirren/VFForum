@@ -1,12 +1,10 @@
 <template>
-  <div class="post-list">
-    <div class="container-fluid">
-      <PostListItem
-        v-for="post in posts"
-        :post="post"
-        :key="post['.key']"
-      />
-    </div>
+  <div>
+    <PostListItem
+      v-for="post in posts"
+      :post="post"
+      :key="post['.key']"
+    />
   </div>
 </template>
 

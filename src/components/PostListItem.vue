@@ -1,15 +1,15 @@
 <template>
-  <div class="post row mb-4 py-3">
-    <div class="user-info text-center col-3 col-md-2">
+  <b-row class="post mb-4 py-3">
+    <b-col cols="3" md="2" class="text-center">
       <p class="mb-0">
-        <a href="#" class="user-name">
-          <strong>{{user.name}}</strong>
+        <a href="#" class="black-link">
+          {{user.name}}
         </a>
       </p>
       <p>
         <small class="online desktop-only">online</small>
       </p>
-      <a href="#">
+      <a href="#" class="black-link">
         <b-img rounded="circle"
                height="75"
                width="75"
@@ -17,24 +17,22 @@
                alt="user.name"
                class="mb-2"/>
       </a>
-      <p class="desktop-only mb-0">
-        <small></small>
-        <br>
+      <p>
         <small>{{userPostsCount}}
-          <span v-if="userPostsCount > 1">threads</span>
-          <span v-else>thread</span>
+          <span v-if="userPostsCount === 1">thread</span>
+          <span v-else>threads</span>
         </small>
       </p>
       <!--<p class="post-date text-muted">
         <small>{{post.publishedAt | date}}</small>
       </p>-->
-      <p class="post-date text-muted">
+      <p class="text-muted">
         <small>
           <BaseDate :timestamp="post.publishedAt"/>
         </small>
       </p>
-    </div>
-    <div class="post-content col-9 col-md-10">
+    </b-col>
+    <b-col cols="9" md="10" class="post-content">
       <div>
         <p>
           <small>{{post.text}}</small>
@@ -43,7 +41,7 @@
       <a href="#"
          class="ml-auto"
          title="Make a change">
-        <i class="fa fa-pencil"></i>
+        <FontAwesome></FontAwesome>
       </a>
       <div class="reactions float-right text-right">
         <ul class="list-inline">
@@ -63,8 +61,8 @@
           + <i class="fa fa-smile-o emoji"></i>
         </b-button>
       </div>
-    </div>
-  </div>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -90,8 +88,7 @@
 
 <style lang="scss" scoped>
   .post {
-    background-color: honeydew;
-    border-right: 3px solid #f0f0f0;
-    border-bottom: 3px solid #f0f0f0;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
   }
 </style>

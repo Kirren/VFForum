@@ -1,12 +1,17 @@
 <template>
-  <div>
-    <h2>
-      <router-link :to="{name: 'CategoryPage', params: {id: category['.key']}}">
+  <b-card no-body
+          header-tag="header"
+          class="mb-3">
+    <h6 slot="header" class="mb-0">
+      <router-link :to="{name: 'CategoryPage', params: {id: category['.key']}}"
+                   class="black-link">
         {{ category.name }}
       </router-link>
-    </h2>
-    <ForumList :forums="categoryForums"/>
-  </div>
+    </h6>
+    <b-list-group flush>
+      <ForumList :forums="categoryForums"/>
+    </b-list-group>
+  </b-card>
 </template>
 
 <script>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>{{category.name}}</h2>
     <CategoryListItem :category="category"/>
   </div>
 </template>

@@ -1,15 +1,20 @@
 <template>
-  <div class="col-12">
+  <div>
     <h1>{{thread.title}}</h1>
-    <div class="text-white">
-      <p>
-        <small class="float-left">By <a href="#" class="text-white">{{users[thread.userId].name}}</a>,
-          <BaseDate :timestamp="thread.publishedAt"/>.
-        </small>
-        <small class="float-right">3 replies by 3 contributors</small>
-      </p>
-    </div>
-    <div class="mb-4 clearfix"></div>
+    <b-row class="mb-5">
+      <b-col class="text-left">
+        <p>
+          <small>By <a href="#" class="black-link">{{users[thread.userId].name}}</a>,
+            <BaseDate :timestamp="thread.publishedAt"/>.
+          </small>
+        </p>
+      </b-col>
+      <b-col class="text-right">
+        <p>
+          <small>3 replies by 3 contributors</small>
+        </p>
+      </b-col>
+    </b-row>
     <PostList :posts="posts"/>
     <PostEditor
       @save="addPost"
@@ -59,8 +64,4 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .post {
-    background-color: #fff;
-  }
-</style>
+<style lang="scss" scoped></style>

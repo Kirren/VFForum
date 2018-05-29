@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12">
+  <div>
 
     <!--<ul class="breadcrumbs">
       <li><a href="/index.html"><i class="fa fa-home fa-btn"></i>Home</a></li>
@@ -7,13 +7,17 @@
       <li class="active"><a href="#">Cooking</a></li>
     </ul>-->
 
-    <div class="forum-header">
-      <div class="forum-details">
+    <b-row class="mb-5" align-v="center">
+      <b-col>
         <h1>{{forum.name}}</h1>
-        <p class="text-lead">{{forum.description}}</p>
-      </div>
-      <a href="#" class="btn-green btn-small">Start a thread</a>
-    </div>
+        <p class="text-lead">
+          {{forum.description}}
+        </p>
+      </b-col>
+      <b-col class="text-right">
+        <button class="btn btn-success btn-small">Start a thread</button>
+      </b-col>
+    </b-row>
 
     <ThreadList :threads="threads"/>
 

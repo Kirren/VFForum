@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <b-list-group>
     <ForumListItem
       v-for="forum in forums"
       :forum="forum"
       :key="forum['.key']"
     />
-  </div>
+  </b-list-group>
 </template>
 
 <script>

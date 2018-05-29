@@ -42,7 +42,7 @@
           </b-col>
           <b-col align-self="end" cols="6" class="text-left">
             <b-button :id="'edit' + post['.key'].slice(-5) +'Button'" href="#" size="sm"
-                      variant="outline-secondary"
+                      variant="outline-danger"
                       class="editPostButton">
               <icon name="pencil-alt"/>
             </b-button>

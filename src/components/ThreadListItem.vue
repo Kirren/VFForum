@@ -11,8 +11,7 @@
         <p class="text-muted">
           <small>
             By <a href="#" class="black-link">{{user.name}}</a>,
-            <BaseDate :timestamp="thread.publishedAt"/>
-            .
+            <BaseDate :timestamp="thread.publishedAt"/>.
           </small>
         </p>
       </b-col>

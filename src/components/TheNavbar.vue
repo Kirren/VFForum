@@ -12,8 +12,8 @@
           <b-nav-item class="d-none d-sm-block d-md-none" href="#">Logout</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown text="Name LastName" right>
-            <b-dropdown-item href="#">View profile</b-dropdown-item>
+          <b-nav-item-dropdown :text="user.name" right>
+            <b-dropdown-item :to="{name: 'UserPage', props: {id: user.id}}">View profile</b-dropdown-item>
             <b-dropdown-item href="#">Log out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -23,8 +23,15 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
-    name: 'TheNavbar'
+    name: 'TheNavbar',
+    computed: {
+      ...mapGetters({
+        'user': 'authUser'
+      })
+    }
   }
 </script>
 

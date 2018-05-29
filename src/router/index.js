@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/pages/HomePage'
-import ThreadPage from '@/pages/ThreadPage'
 import CategoryPage from '@/pages/CategoryPage'
 import ForumPage from '@/pages/ForumPage'
+import ThreadPage from '@/pages/ThreadPage'
+import UserPage from '@/pages/UserPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 Vue.use(Router)
@@ -16,9 +17,9 @@ export default new Router({
       component: HomePage
     },
     {
-      path: '/thread/:id',
-      name: 'ThreadPage',
-      component: ThreadPage,
+      path: '/category/:id',
+      name: 'CategoryPage',
+      component: CategoryPage,
       props: true
     },
     {
@@ -28,9 +29,15 @@ export default new Router({
       props: true
     },
     {
-      path: '/category/:id',
-      name: 'CategoryPage',
-      component: CategoryPage,
+      path: '/thread/:id',
+      name: 'ThreadPage',
+      component: ThreadPage,
+      props: true
+    },
+    {
+      path: '/user/:id',
+      name: 'UserPage',
+      component: UserPage,
       props: true
     },
     {

@@ -1,7 +1,7 @@
 <template>
   <b-row class="post mb-4 py-3">
     <b-col cols="3" md="2" class="text-center">
-      <p class="mb-0">
+      <p class="userNameText">
         <a href="#" class="black-link">
           {{user.name}}
         </a>
@@ -36,14 +36,14 @@
       <b-container class="h-100">
         <b-row style="height: inherit;">
           <b-col align-self="start" cols="12" class="mb-3">
-            <p>
+            <p class="postText">
               <small>{{post.text}}</small>
             </p>
           </b-col>
           <b-col align-self="end" cols="6" class="text-left">
             <b-button :id="'edit' + post['.key'].slice(-5) +'Button'" href="#" size="sm"
                       variant="outline-secondary"
-                      class="edit-post-button">
+                      class="editPostButton">
               <icon name="pencil-alt"/>
             </b-button>
             <b-tooltip :target="'edit' + post['.key'].slice(-5) +'Button'" title="Make a change"/>
@@ -73,8 +73,6 @@
 </template>
 
 <script>
-  import sourceData from '@/data'
-
   export default {
     props: {
       post: {
@@ -84,7 +82,7 @@
     },
     computed: {
       user () {
-        return sourceData.users[this.post.userId]
+        return this.$store.state.users[this.post.userId]
       },
       userPostsCount () {
         return Object.keys(this.user.posts).length
@@ -97,7 +95,13 @@
   .post {
     border: 1px solid lightgrey;
     border-radius: 5px;
-    .edit-post-button {
+    .editPostButton {
+      line-height: 1;
+    }
+    p.postText {
+      word-break: break-word;
+    }
+    p.userNameText {
       line-height: 1;
     }
   }

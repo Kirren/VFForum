@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!--<ul class="breadcrumbs">
       <li><a href="/index.html"><i class="fa fa-home fa-btn"></i>Home</a></li>
       <li><a href="/category.html">Discussions</a></li>
@@ -21,7 +20,6 @@
 
     <ThreadList :threads="threads"/>
 
-
     <!--<div class="pagination">
 			<button class="btn-circle" disabled=""><i class="fa fa-angle-left"></i></button>
 			1 of 3
@@ -31,7 +29,6 @@
 </template>
 
 <script>
-  import sourceData from '@/data'
   import ThreadList from '@/components/ThreadList'
 
   export default {
@@ -45,10 +42,10 @@
     },
     computed: {
       forum () {
-        return sourceData.forums[this.id]
+        return this.$store.state.forums[this.id]
       },
       threads () {
-        return Object.values(sourceData.threads)
+        return Object.values(this.$store.state.threads)
           .filter(thread => thread.forumId === this.id)
       }
     }

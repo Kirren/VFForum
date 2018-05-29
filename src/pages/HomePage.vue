@@ -1,23 +1,19 @@
 <template>
   <div>
     <h1>Welcome to the Forum</h1>
-    <ForumList :forums="forums"/>
+    <CategoryList :categories="categories"/>
   </div>
 </template>
 
 <script>
   import sourceData from '@/data'
-  import ForumList from '@/components/ForumList'
+  import CategoryList from '@/components/CategoryList'
 
   export default {
-    components: {
-      ForumList
-    },
+    components: {CategoryList},
     data () {
       return {
-        forums: Object.values(sourceData.forums),
-        users: sourceData.users,
-        posts: sourceData.posts
+        categories: Object.values(sourceData.categories)
       }
     }
   }

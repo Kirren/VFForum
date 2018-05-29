@@ -4,8 +4,7 @@
     <div class="text-white">
       <p>
         <small class="float-left">By <a href="#" class="text-white">{{users[thread.userId].name}}</a>,
-          <BaseDate :timestamp="thread.publishedAt"/>
-          .
+          <BaseDate :timestamp="thread.publishedAt"/>.
         </small>
         <small class="float-right">3 replies by 3 contributors</small>
       </p>

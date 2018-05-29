@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <b-row  class="bg-header mb-3" align-v="center">
+      <b-row class="bg-header" align-v="center">
         <b-col>
           <h1>
             <router-link :to="{name: 'HomePage'}" class="text-white">Welcome to the Forum</router-link>
           </h1>
         </b-col>
+      </b-row>
+      <b-row class="navbar-border mb-3">
+        <TheNavbar/>
       </b-row>
     </b-container>
     <b-container>
@@ -18,8 +21,11 @@
 </template>
 
 <script>
+  import TheNavbar from '@/components/TheNavbar'
+
   export default {
-    name: 'App'
+    name: 'App',
+    components: {TheNavbar}
   }
 </script>
 
@@ -40,6 +46,9 @@
         padding: 3rem;
         background-color: rgba(0, 0, 0, 0.2);
       }
+    }
+    .navbar-border {
+      border-bottom: 2px solid lightgrey;
     }
     a.black-link {
       color: #000;

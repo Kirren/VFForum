@@ -4,7 +4,9 @@
       <b-row class="bg-header" align-v="center">
         <b-col>
           <h1>
-            <router-link :to="{name: 'HomePage'}" class="text-white">Welcome to the Forum</router-link>
+            <router-link :to="{name: 'HomePage'}" class="text-white">
+              Vue.js Forum
+            </router-link>
           </h1>
         </b-col>
       </b-row>

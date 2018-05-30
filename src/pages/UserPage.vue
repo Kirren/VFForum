@@ -1,37 +1,27 @@
 <template>
   <div>
     <b-row>
-      <b-col cols="3">
-
-        <b-card>
-
-          <p class="text-center">
+      <b-col cols="3" sm="6">
+        <b-card class="text-center">
+          <p>
             <b-img fluid
                    :src="user.avatar"
                    alt=""/>
           </p>
-
           <h1>{{user.username}}</h1>
-
           <p>{{user.name}}</p>
-
-          <p class="text-justify">
+          <p>
             <span v-if="user.bio">{{user.bio}}</span>
             <span v-else>No bio specified.</span>
           </p>
-
           <span class="online">{{user.username}} is online</span>
-
-
           <div class="stats">
-            <span>{{userPostsCount}} posts</span>
-            <span>{{userThreadsCount}} threads</span>
+            <small>{{userPostsCount}} posts</small>
+            <small>{{userThreadsCount}} threads</small>
           </div>
-
           <hr>
-
           <p class="text-center">
-            <icon icon="globe"></icon>
+            <icon name="globe"/>
             <a v-if="user.website" :href="user.website">{{user.website}}</a>
           </p>
 
@@ -47,18 +37,14 @@
         </div>
 
       </b-col>
-
-      <b-col cols="7">
-
+      <b-col cols="7" sm="6">
         <div class="profile-header">
-                  <span class="text-lead">
-                      {{user.username}}'s recent activity
-                  </span>
+          <span class="text-lead">
+            {{user.name}}'s recent activity
+          </span>
           <a href="#">See only started threads?</a>
         </div>
-
         <hr>
-
         <PostList :posts="userPosts"/>
       </b-col>
     </b-row>
@@ -67,6 +53,7 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import { countObjectLength } from '@/helpers'
   import PostList from '@/components/PostList'
 
   export default {
@@ -89,8 +76,11 @@
         }
         return []
       },
+      userPostsCount () {
+        return countObjectLength(this.user.posts)
+      },
       userThreadsCount () {
-        return this.user.threads ? Object.keys(this.user.threads).length : 0
+        return countObjectLength(this.user.threads)
       }
     }
   }

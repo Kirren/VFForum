@@ -45,6 +45,8 @@
 </template>
 
 <script>
+  import { countObjectLength } from '@/helpers'
+
   export default {
     props: {
       thread: {
@@ -54,7 +56,7 @@
     },
     computed: {
       repliesAmount () {
-        return Object.keys(this.thread.posts).length - 1
+        return countObjectLength(this.thread.posts) - 1
       },
       user () {
         return this.$store.state.users[this.thread.userId]

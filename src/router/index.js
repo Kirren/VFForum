@@ -30,7 +30,7 @@ export default new Router({
       props: true
     },
     {
-      path: '/thread/new',
+      path: '/thread/new/:forumId',
       name: 'CreateThreadPage',
       component: CreateThreadPage,
       props: true

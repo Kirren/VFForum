@@ -14,7 +14,7 @@
         </p>
       </b-col>
       <b-col class="text-right">
-        <b-button :to="{ name: 'CreateThreadPage', params: {forum: this.forum} }"
+        <b-button :to="{ name: 'CreateThreadPage', params: {forumId: this.forum['.key']} }"
                   variant="success" size="sm">
           Start a thread
         </b-button>

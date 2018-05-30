@@ -39,15 +39,20 @@
   export default {
     name: 'CreateThreadPage',
     props: {
-      forum: {
+      forumId: {
         required: true,
-        type: Object
+        type: String
       }
     },
     data () {
       return {
         title: '',
         text: ''
+      }
+    },
+    computed: {
+      forum () {
+        return this.$store.state.forums[this.forumId]
       }
     },
     methods: {

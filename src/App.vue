@@ -16,7 +16,7 @@
     </b-container>
     <b-container fluid>
       <b-row>
-        <router-view class="col-12 col-lg-10 col-xl-8 mx-auto"/>
+        <router-view class="col-12 col-lg-11 col-xl-8 mx-auto"/>
       </b-row>
     </b-container>
   </div>

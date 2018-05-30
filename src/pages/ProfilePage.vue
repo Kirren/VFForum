@@ -1,10 +1,12 @@
 <template>
   <div>
     <b-row>
-      <ProfileCard :user="user"
+      <ProfileEditor v-if="showEditor" :user="user"
+                     :userPostsCount="userPostsCount"
+                     :userThreadsCount="userThreadsCount"/>
+      <ProfileCard v-else :user="user"
                    :userPostsCount="userPostsCount"
-                   :userThreadsCount="userThreadsCount"
-      />
+                   :userThreadsCount="userThreadsCount"/>
       <b-col cols="12" lg="6">
         <hr class="d-lg-none">
         <div class="text-center mb-3">
@@ -27,14 +29,20 @@
 
   import PostList from '@/components/PostList'
   import ProfileCard from '@/components/ProfileCard'
+  import ProfileEditor from '@/components/ProfileEditor'
 
   export default {
     name: 'ProfilePage',
-    components: {ProfileCard, PostList},
+    components: {ProfileEditor, ProfileCard, PostList},
     props: {
       id: {
         required: true,
         type: String
+      }
+    },
+    data () {
+      return {
+        showEditor: true
       }
     },
     computed: {

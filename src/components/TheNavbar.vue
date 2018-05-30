@@ -13,7 +13,7 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown :text="user.name" right>
-            <b-dropdown-item :to="{name: 'UserPage', props: {id: user.id}}">View profile</b-dropdown-item>
+            <b-dropdown-item :to="{name: 'ProfilePage', props: {id: user.id}}">View profile</b-dropdown-item>
             <b-dropdown-item href="#">Log out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>

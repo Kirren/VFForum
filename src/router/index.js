@@ -4,7 +4,7 @@ import HomePage from '@/pages/HomePage'
 import CategoryPage from '@/pages/CategoryPage'
 import ForumPage from '@/pages/ForumPage'
 import ThreadPage from '@/pages/ThreadPage'
-import UserPage from '@/pages/UserPage'
+import ProfilePage from '@/pages/ProfilePage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 Vue.use(Router)
@@ -36,8 +36,8 @@ export default new Router({
     },
     {
       path: '/user/:id',
-      name: 'UserPage',
-      component: UserPage,
+      name: 'ProfilePage',
+      component: ProfilePage,
       props: true
     },
     {

@@ -22,7 +22,7 @@
       </b-form-group>
 
       <b-button-group>
-        <b-button variant="warning">
+        <b-button variant="warning" @click.prevent="cancel">
           Cancel
         </b-button>
         <b-button variant="info"
@@ -56,8 +56,12 @@
           forumId: this.forum['.key'],
           title: this.title,
           text: this.text
+        }).then(thread => {
+          this.$router.push({name: 'ThreadPage', params: {id: thread['.key']}})
         })
-        this.$router.push({name: 'ThreadPage', params: {id: this.forum['.key']}})
+      },
+      cancel () {
+        this.$router.push({name: 'ForumPage', params: {id: this.forum['.key']}})
       }
     }
   }

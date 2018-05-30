@@ -9,25 +9,25 @@
                     description="Let us know your name."
                     type="text"
                     v-model="activeUser.username"
-                    :placeholder="activeUser.username ? activeUser.username : 'Username'"/>
+                    placeholder="Your username..."/>
     </b-form-group>
 
     <b-form-group>
       <b-form-input id="userNameInput"
                     type="text"
                     v-model="activeUser.name"
-                    placeholder="Full Name"/>
+                    placeholder="Your full name..."/>
     </b-form-group>
 
     <b-form-group label="Bio"
                   label-for="userBioInput">
       <b-form-textarea id="userBioInput"
                        v-model="activeUser.bio"
-                       :placeholder="activeUser.bio ? activeUser.bio : 'Write a few words about yourself.'">
+                       placeholder="Write a few words about yourself">
       </b-form-textarea>
     </b-form-group>
 
-    <div class="stats text-center">
+    <div class="text-center">
       {{userPostsCount}}
       <span v-if="userPostsCount === 1"> post</span>
       <span v-else> posts</span>
@@ -42,31 +42,35 @@
                   label-for="userWebsiteInput">
       <b-form-input autocomplete="off"
                     id="userWebsiteInput"
-                    :v-model="activeUser.website"/>
+                    v-model="activeUser.website"
+                    placeholder="Your website link..."/>
     </b-form-group>
 
     <b-form-group label="Email"
                   label-for="userEmailInput">
       <b-form-input autocomplete="off"
                     id="userEmailInput"
-                    :v-model="activeUser.email"/>
+                    v-model="activeUser.email"
+                    placeholder="Your email..."/>
     </b-form-group>
 
     <b-form-group label="Location"
                   label-for="userLocationInput">
       <b-form-input autocomplete="off"
                     id="userLocationInput"
-                    :v-model="activeUser.location"/>
+                    v-model="activeUser.location"
+                    placeholder="Your location..."/>
     </b-form-group>
 
     <div class="text-center">
       <b-button-group>
-        <b-button variant="warning">
+        <b-button variant="warning"
+                  @click.prevent="cancel">
           Cancel
         </b-button>
         <b-button variant="info"
                   type="submit"
-                  @click="save">
+                  @click.prevent="save">
           Save
         </b-button>
       </b-button-group>
@@ -98,7 +102,11 @@
     },
     methods: {
       save () {
+        this.$router.push({name: 'ProfilePage'})
         this.$store.dispatch('updateUser', {...this.activeUser})
+      },
+      cancel () {
+        this.$router.push({name: 'ProfilePage'})
       }
     }
   }

@@ -31,7 +31,7 @@
 
         <div class="text-center">
           <hr>
-          <b-button href="edit-profile.html"
+          <b-button :to="{name: 'ProfileEditPage'}"
                     variant="success" size="sm">
             Edit Profile
           </b-button>
@@ -66,7 +66,7 @@
 
       <div class="text-center">
         <hr>
-        <b-button href="edit-profile.html"
+        <b-button :to="{name: 'ProfileEditPage'}"
                   variant="success" size="sm">
           Edit Profile
         </b-button>

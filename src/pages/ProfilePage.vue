@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <ProfileEditor v-if="showEditor" :user="user"
+      <ProfileEditor v-if="edit" :user="user"
                      :userPostsCount="userPostsCount"
                      :userThreadsCount="userThreadsCount"/>
       <ProfileCard v-else :user="user"
@@ -38,11 +38,10 @@
       id: {
         required: true,
         type: String
-      }
-    },
-    data () {
-      return {
-        showEditor: true
+      },
+      edit: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {

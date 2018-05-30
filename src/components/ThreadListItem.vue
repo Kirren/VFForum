@@ -27,11 +27,10 @@
       <b-col cols="2">
         <b-img class="m-1"
                fluid center
-               thumbnail
                rounded="circle"
-               width="50" height="50"
+               width="50"
                :alt="user.name"
-               src="http://i0.kym-cdn.com/photos/images/facebook/000/010/934/46623-batman_pikachu_super.png"/>
+               :src="user.avatar"/>
 
         <!--<div>
 					<p class="text-xsmall">

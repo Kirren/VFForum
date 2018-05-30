@@ -1,6 +1,12 @@
 <template>
   <div>
-    <h1>{{thread.title}}</h1>
+    <h1>
+      {{thread.title}}
+      <b-button :to="{name: 'EditThreadPage', id: this.id}"
+                variant="success" class="float-right">
+        Edit Thread
+      </b-button>
+    </h1>
     <b-row class="mb-5">
       <b-col class="text-left">
         <p>

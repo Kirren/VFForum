@@ -14,7 +14,10 @@
         </p>
       </b-col>
       <b-col class="text-right">
-        <button class="btn btn-success btn-small">Start a thread</button>
+        <b-button :to="{ name: 'CreateThreadPage', params: {forum: this.forum} }"
+                  variant="success" size="sm">
+          Start a thread
+        </b-button>
       </b-col>
     </b-row>
 

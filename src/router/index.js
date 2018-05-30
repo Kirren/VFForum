@@ -4,6 +4,7 @@ import HomePage from '@/pages/HomePage'
 import CategoryPage from '@/pages/CategoryPage'
 import ForumPage from '@/pages/ForumPage'
 import ThreadPage from '@/pages/ThreadPage'
+import CreateThreadPage from '@/pages/CreateThreadPage'
 import ProfilePage from '@/pages/ProfilePage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
@@ -26,6 +27,12 @@ export default new Router({
       path: '/forum/:id',
       name: 'ForumPage',
       component: ForumPage,
+      props: true
+    },
+    {
+      path: '/thread/new',
+      name: 'CreateThreadPage',
+      component: CreateThreadPage,
       props: true
     },
     {

@@ -11,7 +11,7 @@
         <hr class="d-lg-none">
         <div class="text-center mb-3">
           <span class="text-lead">
-            {{user.name}}'s recent activity
+            {{user.username}}'s recent activity
           </span>
           <br>
           <a href="#">See only started threads?</a>

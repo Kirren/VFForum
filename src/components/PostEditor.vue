@@ -8,9 +8,17 @@
                   v-model="text">
         </textarea>
       </div>
-      <div class="form-group">
-        <button class="btn btn-success">Submit</button>
-      </div>
+      <b-button-group>
+        <b-button v-if="isUpdate"
+                  variant="light"
+                  @click="cancel">
+          Cancel
+        </b-button>
+        <b-button variant="success"
+                  type="submit">
+          {{isUpdate ? 'Update' : 'Submit'}}
+        </b-button>
+      </b-button-group>
     </form>
   </b-col>
 </template>
@@ -62,6 +70,9 @@
       },
       persist () {
         return this.isUpdate ? this.update() : this.create()
+      },
+      cancel () {
+        this.$emit('cancel')
       }
     }
   }

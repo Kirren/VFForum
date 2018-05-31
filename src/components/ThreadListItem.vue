@@ -28,7 +28,7 @@
         <b-img class="m-1"
                fluid center
                rounded="circle"
-               height="25"
+               width="50"
                :alt="user.name"
                :src="user.avatar"/>
 

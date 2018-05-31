@@ -22,9 +22,7 @@
       </b-col>
     </b-row>
     <PostList :posts="posts"/>
-    <PostEditor
-      :threadId="id"
-    />
+    <PostEditor :threadId="id"/>
   </div>
 </template>
 

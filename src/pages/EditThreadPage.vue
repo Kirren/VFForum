@@ -28,9 +28,6 @@
       },
       text () {
         return this.$store.state.posts[this.thread.firstPostId].text
-      },
-      title () {
-        return this.$store.state.posts[this.thread.firstPostId].title
       }
     },
     methods: {
@@ -44,7 +41,7 @@
         })
       },
       cancel () {
-        this.$router.push({name: 'ForumPage', params: {id: this.id}})
+        this.$router.push({name: 'ThreadPage', params: {id: this.id}})
       }
     }
   }

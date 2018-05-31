@@ -18,7 +18,8 @@
     </b-form-group>
 
     <b-button-group>
-      <b-button variant="warning" @click.prevent="cancel">
+      <b-button variant="light"
+                @click.prevent="cancel">
         Cancel
       </b-button>
       <b-button variant="info"

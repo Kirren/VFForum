@@ -9,23 +9,20 @@
       <p>
         <small class="online desktop-only">online</small>
       </p>
-      <a href="#" class="black-link">
+      <router-link :to="{name: 'ProfilePage'}">
         <b-img rounded="circle"
                height="75"
                width="75"
                :src="user.avatar"
                alt="user.name"
                class="mb-2"/>
-      </a>
+      </router-link>
       <p>
         <small>{{userPostsCount}}
           <span v-if="userPostsCount === 1">thread</span>
           <span v-else>threads</span>
         </small>
       </p>
-      <!--<p class="post-date text-muted">
-        <small>{{post.publishedAt | date}}</small>
-      </p>-->
       <p class="text-muted">
         <small>
           <BaseDate :timestamp="post.publishedAt"/>
@@ -42,12 +39,19 @@
               </p>
             </b-col>
             <b-col align-self="end" cols="6" class="text-left">
-              <b-button size="sm"
-                        variant="outline-danger"
-                        class="editPostButton"
-                        @click.prevent="editing = true">
-                <icon name="pencil-alt"/>
-              </b-button>
+              <p>
+                <b-button size="sm"
+                          variant="outline-danger"
+                          class="editPostButton"
+                          @click.prevent="editing = true">
+                  <icon name="pencil-alt"/>
+                </b-button>
+
+                <small class="text-muted"
+                       v-if="post.edited">
+                  edited
+                </small>
+              </p>
               <!--<b-tooltip :target="'edit' + post['.key'].slice(-5) +'Button'" title="Make a change"/>-->
             </b-col>
             <b-col align-self="end" cols="6" class="text-right">

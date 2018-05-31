@@ -34,39 +34,48 @@
     </b-col>
     <b-col cols="9" md="10">
       <b-container class="h-100">
-        <b-row style="height: inherit;">
-          <b-col align-self="start" cols="12" class="mb-3">
-            <p class="postText">
-              <small>{{post.text}}</small>
-            </p>
-          </b-col>
-          <b-col align-self="end" cols="6" class="text-left">
-            <b-button :id="'edit' + post['.key'].slice(-5) +'Button'" href="#" size="sm"
-                      variant="outline-danger"
-                      class="editPostButton">
-              <icon name="pencil-alt"/>
-            </b-button>
-            <b-tooltip :target="'edit' + post['.key'].slice(-5) +'Button'" title="Make a change"/>
-          </b-col>
-          <b-col align-self="end" cols="6" class="text-right">
-            <ul class="list-inline">
-              <li class="list-inline-item">💡</li>
-              <li class="list-inline-item">❤</li>
-              <li class="list-inline-item">👎</li>
-              <li class="list-inline-item">👍</li>
-              <li class="list-inline-item">👌</li>
-            </ul>
-            <b-button size="sm" variant="outline-success">
-              <span class="emoji">❤</span>️ 3
-            </b-button>
-            <b-button size="sm" variant="outline-success" class="active-reaction">
-              <span class="emoji">👌️</span>️ 1
-            </b-button>
-            <b-button size="sm" variant="outline-success">
-              + <i class="fa fa-smile-o emoji"></i>
-            </b-button>
-          </b-col>
-        </b-row>
+        <template v-if="!editing">
+          <b-row style="height: inherit;">
+            <b-col align-self="start" cols="12" class="mb-3">
+              <p class="postText">
+                <small>{{post.text}}</small>
+              </p>
+            </b-col>
+            <b-col align-self="end" cols="6" class="text-left">
+              <b-button size="sm"
+                        variant="outline-danger"
+                        class="editPostButton"
+                        @click.prevent="editing = true">
+                <icon name="pencil-alt"/>
+              </b-button>
+              <!--<b-tooltip :target="'edit' + post['.key'].slice(-5) +'Button'" title="Make a change"/>-->
+            </b-col>
+            <b-col align-self="end" cols="6" class="text-right">
+              <ul class="list-inline">
+                <li class="list-inline-item">💡</li>
+                <li class="list-inline-item">❤</li>
+                <li class="list-inline-item">👎</li>
+                <li class="list-inline-item">👍</li>
+                <li class="list-inline-item">👌</li>
+              </ul>
+              <b-button size="sm" variant="outline-success">
+                <span class="emoji">❤</span>️ 3
+              </b-button>
+              <b-button size="sm" variant="outline-success" class="active-reaction">
+                <span class="emoji">👌️</span>️ 1
+              </b-button>
+              <b-button size="sm" variant="outline-success">
+                + <i class="fa fa-smile-o emoji"></i>
+              </b-button>
+            </b-col>
+          </b-row>
+        </template>
+        <div v-else>
+          <b-row>
+            <PostEditor :post="post"
+                        @save="editing = false"/>
+          </b-row>
+        </div>
       </b-container>
     </b-col>
   </b-row>
@@ -74,12 +83,19 @@
 
 <script>
   import { countObjectLength } from '@/helpers'
+  import PostEditor from './PostEditor'
 
   export default {
+    components: {PostEditor},
     props: {
       post: {
         required: true,
         type: Object
+      }
+    },
+    data () {
+      return {
+        editing: false
       }
     },
     computed: {
@@ -88,6 +104,9 @@
       },
       userPostsCount () {
         return countObjectLength(this.user.posts)
+      },
+      isUpdate () {
+        return !!this.title
       }
     }
   }

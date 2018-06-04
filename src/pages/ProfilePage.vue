@@ -1,12 +1,9 @@
 <template>
   <div>
     <b-row>
-      <ProfileEditor v-if="edit" :user="user"
-                     :userPostsCount="userPostsCount"
-                     :userThreadsCount="userThreadsCount"/>
-      <ProfileCard v-else :user="user"
-                   :userPostsCount="userPostsCount"
-                   :userThreadsCount="userThreadsCount"/>
+      <ProfileEditor v-if="edit" :user="user"/>
+      <ProfileCard v-else :user="user"/>
+
       <b-col cols="12" lg="6">
         <hr class="d-lg-none">
         <div class="text-center mb-3">
@@ -25,7 +22,6 @@
 
 <script>
   import { mapGetters } from 'vuex'
-  import { countObjectLength } from '@/helpers'
 
   import PostList from '@/components/PostList'
   import ProfileCard from '@/components/ProfileCard'
@@ -54,12 +50,6 @@
             .filter(post => post.userId === this.user['.key'])
         }
         return []
-      },
-      userPostsCount () {
-        return countObjectLength(this.user.posts)
-      },
-      userThreadsCount () {
-        return countObjectLength(this.user.threads)
       }
     }
   }

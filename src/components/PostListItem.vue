@@ -87,7 +87,6 @@
 </template>
 
 <script>
-  import { countObjectLength } from '@/helpers'
   import PostEditor from './PostEditor'
 
   export default {
@@ -108,7 +107,7 @@
         return this.$store.state.users[this.post.userId]
       },
       userPostsCount () {
-        return countObjectLength(this.user.posts)
+        return this.$store.getters.userPostsCount(this.post.userId)
       },
       isUpdate () {
         return !!this.title

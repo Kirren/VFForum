@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import sourceData from '@/data'
+import {countObjectLength} from '../helpers'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,9 @@ export default new Vuex.Store({
   getters: {
     authUser (state) {
       return state.users[state.authId]
-    }
+    },
+    userThreadsCount: state => id => countObjectLength(state.users[id].threads),
+    userPostsCount: state => id => countObjectLength(state.users[id].posts)
   },
   actions: {
     createThread ({commit, state, dispatch}, {title, text, forumId}) {

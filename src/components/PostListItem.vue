@@ -1,5 +1,5 @@
 <template>
-  <b-row class="post mb-4 py-3">
+  <b-row v-if="post && user" class="post mb-4 py-3">
     <b-col cols="3" md="2" class="text-center">
       <p class="userNameText">
         <a href="#" class="black-link">

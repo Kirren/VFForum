@@ -30,7 +30,6 @@ const config = {
 }
 firebase.initializeApp(config)
 
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

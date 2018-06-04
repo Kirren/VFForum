@@ -10,14 +10,21 @@
     <b-row class="mb-5">
       <b-col class="text-left">
         <p>
-          <small>By <a href="#" class="black-link">{{users[thread.userId].name}}</a>,
+          <small>By <a href="#" class="black-link">{{user.name}}</a>,
             <BaseDate :timestamp="thread.publishedAt"/>.
           </small>
         </p>
       </b-col>
       <b-col class="text-right">
         <p>
-          <small>{{repliesAmount}} replies by {{contributorsAmount}} contributors</small>
+          <small>
+            {{repliesAmount}}
+            <span v-if="repliesAmount === 1"> reply </span>
+            <span v-else> replies </span>
+            by {{contributorsAmount}}
+            <span v-if="contributorsAmount === 1"> contributor</span>
+            <span v-else> contributors</span>.
+          </small>
         </p>
       </b-col>
     </b-row>
@@ -42,8 +49,8 @@
       thread () {
         return this.$store.state.threads[this.id]
       },
-      users () {
-        return this.$store.state.users
+      user () {
+        return this.$store.state.users[this.thread.userId]
       },
       posts () {
         const postIds = Object.values(this.thread.posts)

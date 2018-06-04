@@ -19,7 +19,13 @@
       </router-link>
       <p>
         <small>{{userPostsCount}}
-          <span v-if="userPostsCount === 1">thread</span>
+          <span v-if="userPostsCount === 1">post</span>
+          <span v-else>posts</span>
+        </small>
+      </p>
+      <p>
+        <small>{{userThreadsCount}}
+          <span v-if="userThreadsCount === 1">thread</span>
           <span v-else>threads</span>
         </small>
       </p>
@@ -108,6 +114,9 @@
       },
       userPostsCount () {
         return this.$store.getters.userPostsCount(this.post.userId)
+      },
+      userThreadsCount () {
+        return this.$store.getters.userThreadsCount(this.post.userId)
       },
       isUpdate () {
         return !!this.title

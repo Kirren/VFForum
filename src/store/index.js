@@ -24,7 +24,9 @@ export default new Vuex.Store({
       return state.users[state.authId]
     },
     userThreadsCount: state => id => countObjectLength(state.users[id].threads),
-    userPostsCount: state => id => countObjectLength(state.users[id].posts)
+    userPostsCount: state => id => countObjectLength(state.users[id].posts),
+    threadContributorsCount: state => id => countObjectLength(state.threads[id].contributors) - 1,
+    threadRepliesCount: state => id => countObjectLength(state.threads[id].posts) - 1
   },
   actions: {
     createThread ({commit, state, dispatch}, {title, text, forumId}) {
@@ -42,8 +44,8 @@ export default new Vuex.Store({
         }
 
         commit('setThread', {thread, threadId})
-        commit('appendThreadToForum', {parentId: forumId, childId:threadId})
-        commit('appendThreadToUser', {parentId: userId, childId:threadId})
+        commit('appendThreadToForum', {parentId: forumId, childId: threadId})
+        commit('appendThreadToUser', {parentId: userId, childId: threadId})
 
         dispatch('createPost', {text, threadId})
           .then(post => {

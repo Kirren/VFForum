@@ -17,7 +17,7 @@
       </b-col>
       <b-col class="text-right">
         <p>
-          <small>3 replies by 3 contributors</small>
+          <small>{{repliesAmount}} replies by {{contributorsAmount}} contributors</small>
         </p>
       </b-col>
     </b-row>
@@ -49,6 +49,17 @@
         const postIds = Object.values(this.thread.posts)
         return Object.values(this.$store.state.posts)
           .filter(post => postIds.includes(post['.key']))
+      },
+      contributorsAmount () {
+        const replies = Object.keys(this.thread.posts)
+          .filter(postId => postId !== this.thread.firstPostId)
+          .map(postId => this.$store.state.posts[postId])
+        const userIds = replies.map(post => post.userId)
+
+        return userIds.filter((id, index) => userIds.indexOf(id) === index).length
+      },
+      repliesAmount () {
+        return this.$store.getters.threadRepliesCount(this.thread['.key'])
       }
     }
   }

@@ -132,11 +132,11 @@ export default new Vuex.Store({
         })
       })
     },
-    fetch ({state, commit}, {id, resource}) {
+    fetchData ({state, commit}, {id, resource}) {
       return new Promise((resolve, reject) => {
         firebase.database().ref(resource).child(id).once('value', snapshot => {
           const item = snapshot.val()
-          commit('setPost', {resource, id: snapshot.key, item: {...item, '.key': snapshot.key}})
+          commit('setData', {resource, id: snapshot.key, item: {...item, '.key': snapshot.key}})
           resolve(state[resource][id])
         })
       })
@@ -151,6 +151,9 @@ export default new Vuex.Store({
     },
     setPost (state, {post, postId}) {
       Vue.set(state.posts, postId, post)
+    },
+    setData (state, {resource, item, id}) {
+      Vue.set(state[resource], id, item)
     },
     appendPostToThread: makeAppendChildToParentMutation({parent: 'threads', child: 'posts'}),
     appendPostToUser: makeAppendChildToParentMutation({parent: 'users', child: 'posts'}),

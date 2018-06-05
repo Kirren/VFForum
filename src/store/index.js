@@ -131,6 +131,15 @@ export default new Vuex.Store({
           resolve(state.posts[id])
         })
       })
+    },
+    fetch ({state, commit}, {id, resource}) {
+      return new Promise((resolve, reject) => {
+        firebase.database().ref(resource).child(id).once('value', snapshot => {
+          const item = snapshot.val()
+          commit('setPost', {resource, id: snapshot.key, item: {...item, '.key': snapshot.key}})
+          resolve(state[resource][id])
+        })
+      })
     }
   },
   mutations: {

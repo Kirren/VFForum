@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import firebase from 'firebase'
 
 import {countObjectLength} from '../helpers'
 
@@ -103,6 +104,33 @@ export default new Vuex.Store({
     },
     updateUser ({commit}, user) {
       commit('setUser', {user, userId: user['.key']})
+    },
+    fetchThread ({state, commit}, {id}) {
+      return new Promise((resolve, reject) => {
+        firebase.database().ref('threads').child(this.id).once('value', snapshot => {
+          const thread = snapshot.val()
+          this.$store.commit('setThread', {threadId: snapshot.key, thread: {...thread, '.key': snapshot.key}})
+          resolve(state.threads[id])
+        })
+      })
+    },
+    fetchUser ({state, commit}, {id}) {
+      return new Promise((resolve, reject) => {
+        firebase.database().ref('users').child(id).once('value', snapshot => {
+          const user = snapshot.val()
+          this.$store.commit('setUser', {userId: snapshot.key, user: {...user, '.key': snapshot.key}})
+          resolve(state.users[id])
+        })
+      })
+    },
+    fetchPost ({state, commit}, {id}) {
+      return new Promise((resolve, reject) => {
+        firebase.database().ref('posts').child(id).once('value', snapshot => {
+          const post = snapshot.val()
+          this.$store.commit('setPost', {postId: snapshot.key, post: {...post, '.key': snapshot.key}})
+          resolve(state.posts[id])
+        })
+      })
     }
   },
   mutations: {

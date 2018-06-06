@@ -121,6 +121,9 @@ export default new Vuex.Store({
           resolve(state[resource][id])
         })
       })
+    },
+    fetchDataArray ({dispatch}, {ids, resource}) {
+      return Promise.all(ids.map(id => dispatch('fetchData', {id, resource})))
     }
   },
   mutations: {

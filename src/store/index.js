@@ -106,13 +106,16 @@ export default new Vuex.Store({
       commit('setUser', {user, userId: user['.key']})
     },
     fetchThread ({dispatch}, {id}) {
-      return dispatch('fetchData', {resource: 'threads', id})
+      return dispatch('fetchData', {id, resource: 'threads'})
     },
     fetchUser ({dispatch}, {id}) {
-      return dispatch('fetchData', {resource: 'users', id})
+      return dispatch('fetchData', {id, resource: 'users'})
     },
     fetchPost ({dispatch}, {id}) {
-      return dispatch('fetchData', {resource: 'posts', id})
+      return dispatch('fetchData', {id, resource: 'posts'})
+    },
+    fetchPosts ({dispatch}, {ids}) {
+      return dispatch('fetchDataArray', {ids, resource: 'posts'})
     },
     fetchData ({state, commit}, {id, resource}) {
       return new Promise((resolve, reject) => {

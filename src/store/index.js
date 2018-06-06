@@ -113,11 +113,12 @@ export default new Vuex.Store({
             const category = catObject[catId]
             commit('setData', {resource: 'categories', id: catId, item: category})
           })
+          resolve(Object.values(state.categories))
         })
-        resolve(Object.values(state.categories))
       })
-
-      // return dispatch('fetchData', {id, resource: 'categories'})
+    },
+    fetchForums ({dispatch}, {ids}) {
+      return dispatch('fetchDataArray', {ids, resource: 'forums'})
     },
     fetchThread ({dispatch}, {id}) {
       return dispatch('fetchData', {id, resource: 'threads'})

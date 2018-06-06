@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="forum">
     <!--<ul class="breadcrumbs">
       <li><a href="/index.html"><i class="fa fa-home fa-btn"></i>Home</a></li>
       <li><a href="/category.html">Discussions</a></li>
@@ -51,6 +51,15 @@
         return Object.values(this.$store.state.threads)
           .filter(thread => thread.forumId === this.id)
       }
+    },
+    created () {
+      this.$store.dispatch('fetchForum', {id: this.id})
+        .then(forum => {
+          this.$store.dispatch('fetchThreads', {ids: forum.threads})
+            .then(threads => {
+              threads.forEach(thread => this.$store.dispatch('fetchUser', {id: thread.userId}))
+            })
+        })
     }
   }
 </script>

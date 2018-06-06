@@ -27,7 +27,8 @@
         return this.$store.state.threads[this.id]
       },
       text () {
-        return this.$store.state.posts[this.thread.firstPostId].text
+        const post = this.$store.state.posts[this.thread.firstPostId]
+        return post ? post.text : null
       }
     },
     methods: {
@@ -43,6 +44,10 @@
       cancel () {
         this.$router.push({name: 'ThreadPage', params: {id: this.id}})
       }
+    },
+    created () {
+      this.$store.dispatch('fetchThread', {id: this.id})
+        .then(thread => this.$store.dispatch('fetchPost', {id: thread.firstPostId}))
     }
   }
 </script>

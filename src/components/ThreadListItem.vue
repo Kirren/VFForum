@@ -1,5 +1,5 @@
 <template>
-  <b-list-group-item>
+  <b-list-group-item v-if="thread && user">
     <b-row>
       <b-col cols="8">
         <p class="mb-0">

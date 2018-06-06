@@ -105,6 +105,20 @@ export default new Vuex.Store({
     updateUser ({commit}, user) {
       commit('setUser', {user, userId: user['.key']})
     },
+    fetchData ({state, commit}, {id, resource}) {
+      return new Promise((resolve, reject) => {
+        firebase.database().ref(resource).child(id).once('value', snapshot => {
+          commit('setData', {resource, id: snapshot.key, item: snapshot.val()})
+          resolve(state[resource][id])
+        })
+      })
+    },
+    fetchDataArray ({dispatch}, {ids, resource}) {
+      return Promise.all(ids.map(id => dispatch('fetchData', {id, resource})))
+    },
+    fetchCategory ({dispatch}, {id}) {
+      return dispatch('fetchData', {id, resource: 'categories'})
+    },
     fetchAllCategories ({state, commit}) {
       return new Promise((resolve, reject) => {
         firebase.database().ref('categories').once('value', snapshot => {
@@ -117,31 +131,29 @@ export default new Vuex.Store({
         })
       })
     },
+    fetchForum ({dispatch}, {id}) {
+      return dispatch('fetchData', {id, resource: 'forums'})
+    },
     fetchForums ({dispatch}, {ids}) {
       return dispatch('fetchDataArray', {ids, resource: 'forums'})
     },
     fetchThread ({dispatch}, {id}) {
       return dispatch('fetchData', {id, resource: 'threads'})
     },
+    fetchThreads ({dispatch}, {ids}) {
+      return dispatch('fetchDataArray', {ids, resource: 'threads'})
+    },
     fetchUser ({dispatch}, {id}) {
       return dispatch('fetchData', {id, resource: 'users'})
+    },
+    fetchUsers ({dispatch}, {ids}) {
+      return dispatch('fetchDataArray', {ids, resource: 'users'})
     },
     fetchPost ({dispatch}, {id}) {
       return dispatch('fetchData', {id, resource: 'posts'})
     },
     fetchPosts ({dispatch}, {ids}) {
       return dispatch('fetchDataArray', {ids, resource: 'posts'})
-    },
-    fetchData ({state, commit}, {id, resource}) {
-      return new Promise((resolve, reject) => {
-        firebase.database().ref(resource).child(id).once('value', snapshot => {
-          commit('setData', {resource, id: snapshot.key, item: snapshot.val()})
-          resolve(state[resource][id])
-        })
-      })
-    },
-    fetchDataArray ({dispatch}, {ids, resource}) {
-      return Promise.all(ids.map(id => dispatch('fetchData', {id, resource})))
     }
   },
   mutations: {

@@ -11,7 +11,7 @@
           <b-nav-item class="d-none d-sm-block d-md-none" href="#">My Profile</b-nav-item>
           <b-nav-item class="d-none d-sm-block d-md-none" href="#">Logout</b-nav-item>
         </b-navbar-nav>
-        <b-navbar-nav class="ml-auto">
+        <b-navbar-nav v-if="user" class="ml-auto">
           <b-nav-item-dropdown :text="user.name" right>
             <b-dropdown-item :to="{name: 'ProfilePage', props: {id: user.id}}">View profile</b-dropdown-item>
             <b-dropdown-item href="#">Log out</b-dropdown-item>

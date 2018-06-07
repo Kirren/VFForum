@@ -72,7 +72,7 @@ export default {
   updateUser ({commit}, user) {
     commit('setUser', {user, userId: user['.key']})
   },
-  fetchData ({state, commit}, {id, resource}) {
+  fetchData: ({state, commit}, {id, resource}) => {
     return new Promise((resolve, reject) => {
       firebase.database().ref(resource).child(id).once('value', snapshot => {
         commit('setData', {resource, id: snapshot.key, item: snapshot.val()})
@@ -80,14 +80,12 @@ export default {
       })
     })
   },
-  fetchDataArray ({dispatch}, {ids, resource}) {
+  fetchDataArray: ({dispatch}, {ids, resource}) => {
     ids = Array.isArray(ids) ? ids : Object.keys(ids)
     return Promise.all(ids.map(id => dispatch('fetchData', {id, resource})))
   },
-  fetchCategory ({dispatch}, {id}) {
-    return dispatch('fetchData', {id, resource: 'categories'})
-  },
-  fetchAllCategories ({state, commit}) {
+  fetchCategory: ({dispatch}, {id}) => dispatch('fetchData', {id, resource: 'categories'}),
+  fetchAllCategories: ({state, commit}) => {
     return new Promise((resolve, reject) => {
       firebase.database().ref('categories').once('value', snapshot => {
         const catObject = snapshot.val()
@@ -100,19 +98,11 @@ export default {
     })
   },
   fetchForum: ({dispatch}, {id}) => dispatch('fetchData', {id, resource: 'forums'}),
-  fetchForums ({dispatch}, {ids}) {
-    return dispatch('fetchDataArray', {ids, resource: 'forums'})
-  },
+  fetchForums: ({dispatch}, {ids}) => dispatch('fetchDataArray', {ids, resource: 'forums'}),
   fetchThread: ({dispatch}, {id}) => dispatch('fetchData', {id, resource: 'threads'}),
-  fetchThreads ({dispatch}, {ids}) {
-    return dispatch('fetchDataArray', {ids, resource: 'threads'})
-  },
+  fetchThreads: ({dispatch}, {ids}) => dispatch('fetchDataArray', {ids, resource: 'threads'}),
   fetchUser: ({dispatch}, {id}) => dispatch('fetchData', {id, resource: 'users'}),
-  fetchUsers ({dispatch}, {ids}) {
-    return dispatch('fetchDataArray', {ids, resource: 'users'})
-  },
+  fetchUsers: ({dispatch}, {ids}) => dispatch('fetchDataArray', {ids, resource: 'users'}),
   fetchPost: ({dispatch}, {id}) => dispatch('fetchData', {id, resource: 'posts'}),
-  fetchPosts ({dispatch}, {ids}) {
-    return dispatch('fetchDataArray', {ids, resource: 'posts'})
-  }
+  fetchPosts: ({dispatch}, {ids}) => dispatch('fetchDataArray', {ids, resource: 'posts'})
 }

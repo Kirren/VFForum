@@ -47,9 +47,9 @@ export default {
     updates[`posts/${postId}`] = post
     updates[`threads/${post.threadId}/posts/${postId}`] = postId
     updates[`users/${post.userId}/posts/${postId}`] = postId
-    firebase.database().ref('posts').push(updates)
+    firebase.database().ref().update(updates)
       .then(() => {
-        commit('setItem', {resource: 'posts', item: post, id: postId})
+        commit('setData', {resource: 'posts', item: post, id: postId})
         commit('appendPostToThread', {parentId: post.threadId, childId: postId})
         commit('appendPostToUser', {parentId: post.userId, childId: postId})
 

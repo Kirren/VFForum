@@ -13,6 +13,7 @@ export default {
       const post = { text, publishedAt, threadId, userId }
 
       const updates = {}
+
       updates[`threads/${threadId}`] = thread
       updates[`forums/${forumId}/threads/${threadId}`] = threadId
       updates[`users/${userId}/threads/${threadId}`] = threadId
@@ -52,9 +53,11 @@ export default {
     post.publishedAt = Math.floor(Date.now() / 1000)
 
     const updates = {}
+
     updates[`posts/${postId}`] = post
     updates[`threads/${post.threadId}/posts/${postId}`] = postId
     updates[`users/${post.userId}/posts/${postId}`] = postId
+
     firebase.database().ref().update(updates)
       .then(() => {
         commit('setData', {resource: 'posts', item: post, id: postId})
@@ -68,20 +71,19 @@ export default {
   updatePost ({commit, state}, {id, text}) {
     return new Promise((resolve, reject) => {
       const post = state.posts[id]
+      const edit = {
+        at: Math.floor(Date.now() / 1000),
+        by: state.authId
+      }
 
-      commit('setPost', {
-        postId: id,
-        post: {
-          ...post,
-          text,
-          edited: {
-            at: Math.floor(Date.now() / 1000),
-            by: state.authId
-          }
-        }
-      })
+      const updates = {text, edited: edit}
 
-      resolve(post)
+      firebase.database().ref('posts').child(id).update(updates)
+        .then(() => {
+          commit('setPost', { postId: id, post: { ...post, text, edited: edit } })
+
+          resolve(post)
+        })
     })
   },
   updateUser ({commit}, user) {

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="ready">
+  <div v-if="dataReady">
     <CategoryList :categories="categories"/>
   </div>
 </template>
@@ -7,14 +7,11 @@
 <script>
   import { mapActions } from 'vuex'
   import CategoryList from '@/components/CategoryList'
+  import dataLoader from '@/mixins/dataLoader'
 
   export default {
     components: {CategoryList},
-    data () {
-      return {
-        ready: false
-      }
-    },
+    mixins: [dataLoader],
     computed: {
       categories () {
         return Object.values(this.$store.state.categories)
@@ -25,9 +22,9 @@
     },
     created () {
       this.fetchAllCategories()
-        .then(categories => Promise.all(categories.all(category => this.fetchForums({ ids: Object.keys(category.forums) }))))
+        .then(categories => Promise.all(categories.map(category => this.fetchForums({ ids: Object.keys(category.forums) }))))
         .then(() => {
-          this.ready = true
+          this.dataFetched()
         })
     }
   }

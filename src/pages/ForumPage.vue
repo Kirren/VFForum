@@ -1,5 +1,5 @@
 <template>
-  <div v-if="forum">
+  <div v-if="dataReady">
     <!--<ul class="breadcrumbs">
       <li><a href="/index.html"><i class="fa fa-home fa-btn"></i>Home</a></li>
       <li><a href="/category.html">Discussions</a></li>
@@ -34,10 +34,12 @@
 <script>
   import { mapActions } from 'vuex'
   import ThreadList from '@/components/ThreadList'
+  import dataLoader from '@/mixins/dataLoader'
 
   export default {
     name: 'ForumPage',
     components: { ThreadList },
+    mixins: [dataLoader],
     props: {
       id: {
         required: true,
@@ -58,12 +60,9 @@
     },
     created () {
       this.fetchForum({id: this.id})
-        .then(forum => {
-          this.fetchThreads({ids: forum.threads})
-            .then(threads => {
-              threads.forEach(thread => this.fetchUser({id: thread.userId}))
-            })
-        })
+        .then(forum => this.fetchThreads({ids: forum.threads}))
+        .then(threads => Promise.all(threads.map(thread => this.fetchUser({id: thread.userId}))))
+        .then(() => { this.dataFetched() })
     }
   }
 </script>

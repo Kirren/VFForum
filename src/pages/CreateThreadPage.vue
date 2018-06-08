@@ -1,5 +1,5 @@
 <template>
-  <div v-if="forum">
+  <div v-if="dataReady">
     <h1>
       Create new thread in <i>{{forum.name}}</i>
     </h1>
@@ -10,11 +10,13 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import ThreadEditor from '../components/ThreadEditor'
+  import ThreadEditor from '@/components/ThreadEditor'
+  import dataLoader from '@/mixins/dataLoader'
 
   export default {
     name: 'CreateThreadPage',
     components: {ThreadEditor},
+    mixins: [dataLoader],
     props: {
       forumId: {
         required: true,
@@ -49,6 +51,7 @@
     },
     created () {
       this.fetchForum({id: this.forumId})
+        .then(() => { this.dataFetched() })
     }
   }
 </script>

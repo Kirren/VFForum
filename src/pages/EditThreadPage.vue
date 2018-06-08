@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="dataReady">
     <h1>
       Edit thread called <i>{{thread.title}}</i>
     </h1>
@@ -13,10 +13,12 @@
 <script>
   import { mapActions } from 'vuex'
   import ThreadEditor from '@/components/ThreadEditor'
+  import dataLoader from '@/mixins/dataLoader'
 
   export default {
     name: 'EditThreadPage',
     components: {ThreadEditor},
+    mixins: [dataLoader],
     props: {
       id: {
         required: true,
@@ -51,6 +53,7 @@
     created () {
       this.fetchThread({id: this.id})
         .then(thread => this.fetchPost({id: thread.firstPostId}))
+        .then(() => { this.dataFetched() })
     }
   }
 </script>

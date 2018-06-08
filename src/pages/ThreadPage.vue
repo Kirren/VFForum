@@ -1,5 +1,5 @@
 <template>
-  <div v-if="thread && user">
+  <div v-if="dataReady">
     <h1>
       {{thread.title}}
       <b-button :to="{name: 'EditThreadPage', id: this.id}"
@@ -38,9 +38,11 @@
   import PostList from '@/components/PostList'
   import PostEditor from '@/components/PostEditor'
   import {countObjectLength} from '@/helpers'
+  import dataLoader from '@/mixins/dataLoader'
 
   export default {
     components: { PostList, PostEditor },
+    mixins: [dataLoader],
     props: {
       id: {
         required: true,
@@ -73,13 +75,14 @@
       this.fetchThread({id: this.id})
         .then(thread => {
           this.fetchUser({id: thread.userId})
-          this.fetchPosts({ids: Object.keys(thread.posts)})
-            .then(posts => {
-              posts.forEach(post => {
-                this.fetchUser({id: post.userId})
-              })
-            })
+          return this.fetchPosts({ids: Object.keys(thread.posts)})
         })
+        .then(posts => {
+          return Promise.all(posts.map(post => {
+            this.fetchUser({id: post.userId})
+          }))
+        })
+        .then(() => { this.dataFetched() })
     }
   }
 </script>

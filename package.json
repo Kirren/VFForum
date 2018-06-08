@@ -16,6 +16,7 @@
     "hoek": "^4.2.1",
     "moment": "^2.22.1",
     "npm": "^6.1.0",
+    "nprogress": "^0.2.0",
     "tunnel-agent": "^0.6.0",
     "vue": "^2.5.2",
     "vue-awesome": "^3.0.0",

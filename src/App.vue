@@ -16,7 +16,7 @@
     </b-container>
     <b-container fluid>
       <b-row>
-        <router-view v-show="showPage" @ready="showPage = true"
+        <router-view v-show="showPage" @ready="pageReady"
                      class="col-12 col-lg-11 col-xl-8 mx-auto"/>
         <div v-show="!showPage" class="col-12 text-center">
           <Spinner/>
@@ -29,6 +29,7 @@
 <script>
   import TheNavbar from '@/components/TheNavbar'
   import Spinner from '@/components/Spinner'
+  import NProgress from 'nprogress'
 
   export default {
     name: 'App',
@@ -38,9 +39,20 @@
       }
     },
     components: { TheNavbar, Spinner },
+    methods: {
+      pageReady () {
+        this.showPage = true
+        NProgress.done()
+      }
+    },
     created () {
+      NProgress.configure({
+        speed: 200,
+        showSpinner: false
+      })
       this.$router.beforeEach((to, from, next) => {
         this.showPage = false
+        NProgress.start()
         next()
       })
     }
@@ -50,6 +62,7 @@
 <style lang="scss">
   @import '~bootstrap/dist/css/bootstrap.css';
   @import '~bootstrap-vue/dist/bootstrap-vue.css';
+  @import '~nprogress/nprogress.css';
 
   #app {
     .bg-header {

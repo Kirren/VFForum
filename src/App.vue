@@ -18,7 +18,9 @@
       <b-row>
         <router-view v-show="showPage" @ready="showPage = true"
                      class="col-12 col-lg-11 col-xl-8 mx-auto"/>
-        <div v-show="!showPage" class="col-12 text-center">loading...</div>
+        <div v-show="!showPage" class="col-12 text-center">
+          <Spinner/>
+        </div>
       </b-row>
     </b-container>
   </div>
@@ -26,6 +28,7 @@
 
 <script>
   import TheNavbar from '@/components/TheNavbar'
+  import Spinner from '@/components/Spinner'
 
   export default {
     name: 'App',
@@ -34,7 +37,7 @@
         showPage: false
       }
     },
-    components: {TheNavbar},
+    components: { TheNavbar, Spinner },
     created () {
       this.$router.beforeEach((to, from, next) => {
         this.showPage = false

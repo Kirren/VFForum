@@ -7,6 +7,7 @@ export default {
   methods: {
     dataFetched () {
       this.dataReady = true
+      this.$emit('ready')
     }
   }
 }

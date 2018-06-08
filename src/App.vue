@@ -16,7 +16,9 @@
     </b-container>
     <b-container fluid>
       <b-row>
-        <router-view class="col-12 col-lg-11 col-xl-8 mx-auto"/>
+        <router-view v-show="showPage" @ready="showPage = true"
+                     class="col-12 col-lg-11 col-xl-8 mx-auto"/>
+        <div v-show="!showPage" class="col-12 text-center">loading...</div>
       </b-row>
     </b-container>
   </div>
@@ -27,7 +29,18 @@
 
   export default {
     name: 'App',
-    components: {TheNavbar}
+    data () {
+      return {
+        showPage: false
+      }
+    },
+    components: {TheNavbar},
+    created () {
+      this.$router.beforeEach((to, from, next) => {
+        this.showPage = false
+        next()
+      })
+    }
   }
 </script>
 

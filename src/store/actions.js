@@ -59,6 +59,7 @@ export default {
       .then(() => {
         commit('setData', {resource: 'posts', item: post, id: postId})
         commit('appendPostToThread', {parentId: post.threadId, childId: postId})
+        commit('appendContributorToThread', {parentId: post.threadId, childId: post.userId})
         commit('appendPostToUser', {parentId: post.userId, childId: postId})
 
         return Promise.resolve(state.posts[postId])

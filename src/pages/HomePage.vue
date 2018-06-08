@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="ready">
     <CategoryList :categories="categories"/>
   </div>
 </template>
@@ -10,6 +10,11 @@
 
   export default {
     components: {CategoryList},
+    data () {
+      return {
+        ready: false
+      }
+    },
     computed: {
       categories () {
         return Object.values(this.$store.state.categories)
@@ -20,10 +25,9 @@
     },
     created () {
       this.fetchAllCategories()
-        .then(categories => {
-          categories.forEach(category => {
-            this.fetchForums({ids: Object.keys(category.forums)})
-          })
+        .then(categories => Promise.all(categories.all(category => this.fetchForums({ ids: Object.keys(category.forums) }))))
+        .then(() => {
+          this.ready = true
         })
     }
   }

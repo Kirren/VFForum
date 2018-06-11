@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.11",
+    "dotenv": "^6.0.0",
     "firebase": "^5.0.4",
     "hoek": "^4.2.1",
     "moment": "^2.22.1",

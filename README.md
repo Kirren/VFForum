@@ -1,6 +1,7 @@
-# vue-forum
+# VFForum
 
-> A Vue.js project
+> A Vue.js + Firebase project.
+> Uses: Vue.js, Vuex, Vue-Routing, Firebase DB, Vue-Bootstrap, SCSS & Pug precompilers.
 
 ## Build Setup
 

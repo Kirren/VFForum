@@ -7,6 +7,7 @@ import ThreadPage from '@/pages/ThreadPage'
 import EditThreadPage from '@/pages/EditThreadPage'
 import CreateThreadPage from '@/pages/CreateThreadPage'
 import ProfilePage from '@/pages/ProfilePage'
+import RegisterPage from '@/pages/RegisterPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 Vue.use(Router)
@@ -59,6 +60,12 @@ export default new Router({
       name: 'ProfileEditPage',
       component: ProfilePage,
       props: {edit: true}
+    },
+    {
+      path: '/register',
+      name: 'RegisterPage',
+      component: RegisterPage,
+      props: true
     },
     {
       path: '*',

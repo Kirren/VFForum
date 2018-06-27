@@ -1,7 +1,7 @@
 <template>
   <b-row class="justify-content-center">
     <b-col cols="12" md="6">
-      <b-form @submit.prevent="register">
+      <form @submit.prevent="register">
         <h1 class="text-center">Register</h1>
 
         <b-form-group label="Full Name"
@@ -48,7 +48,7 @@
           <b-button type="submit" variant="info">Register</b-button>
           <b-button variant="danger">Sign up with Google</b-button>
         </b-button-group>
-      </b-form>
+      </form>
     </b-col>
   </b-row>
 </template>
@@ -69,8 +69,7 @@
     },
     methods: {
       register () {
-        console.log(this.form)
-        this.$store.dispatch('createUser', this.form)
+        this.$store.dispatch('registerUserWithEmailAndPassword', this.form)
           .then(() => this.$router.push('/'))
       }
     },

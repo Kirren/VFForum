@@ -60,6 +60,13 @@ export default {
         })
     })
   },
+  fetchAuthUser ({dispatch, commit}) {
+    const userId = firebase.auth().currentUser.uid
+    return dispatch('fetchUser', {id: userId})
+      .then(() => {
+        commit('setAuthId', userId)
+      })
+  },
   createUser ({state, commit}, {id, email, name, username, avatar = null}) {
     return new Promise((resolve, reject) => {
       const registeredAt = Math.floor(Date.now() / 1000)
@@ -79,6 +86,9 @@ export default {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(user => {
         return dispatch('createUser', {id: user.user.uid, email, name, username, password, avatar})
+          .then(() => {
+            dispatch('fetchAuthUser')
+          })
       })
   },
   createPost ({commit, state}, post) {

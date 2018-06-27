@@ -10,6 +10,9 @@ const makeAppendChildToParentMutation = ({parent, child}) =>
   }
 
 export default {
+  setAuthId (state, id) {
+    state.authId = id
+  },
   setUser (state, {user, userId}) {
     Vue.set(state.users, userId, user)
   },

@@ -62,10 +62,20 @@ export default {
   },
   fetchAuthUser ({dispatch, commit}) {
     const userId = firebase.auth().currentUser.uid
-    return dispatch('fetchUser', {id: userId})
-      .then(() => {
-        commit('setAuthId', userId)
+
+    return new Promise((resolve, reject) => {
+      firebase.database().ref('users').child(userId).once('value', snapshot => {
+        if (snapshot.exists()) {
+          return dispatch('fetchUser', {id: userId})
+            .then(user => {
+              commit('setAuthId', userId)
+              resolve(user)
+            })
+        } else {
+          resolve(null)
+        }
       })
+    })
   },
   createUser ({state, commit}, {id, email, name, username, avatar = null}) {
     return new Promise((resolve, reject) => {
@@ -74,7 +84,7 @@ export default {
       email = email.toLowerCase()
 
       const user = {avatar, email, name, username, usernameLower, registeredAt}
-      console.log(id)
+
       firebase.database().ref('users').child(id).set(user)
         .then(() => {
           commit('setData', {resource: 'users', id: id, item: user})
@@ -84,14 +94,40 @@ export default {
   },
   registerUserWithEmailAndPassword ({dispatch}, {email, name, username, password, avatar = null}) {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        return dispatch('createUser', {id: user.user.uid, email, name, username, password, avatar})
+      .then(data => {
+        console.log(data)
+        return dispatch('createUser', {
+          id: data.user.uid,
+          email,
+          name,
+          username,
+          password,
+          avatar
+        })
       })
+      .then(() => dispatch('fetchAuthUser'))
       .catch(error => alert(error.message))
   },
-  signInWithEmailAndPassword ({context}, {email, password}) {
+  signInWithEmailAndPassword (context, {email, password}) {
     return firebase.auth().signInWithEmailAndPassword(email, password)
       .catch(error => alert(error.message))
+  },
+  signInWithGoogle ({dispatch}) {
+    const provider = new firebase.auth.GoogleAuthProvider()
+
+    return firebase.auth().signInWithPopup(provider)
+      .then(data => {
+        const user = data.user
+        console.log(user)
+
+        firebase.database().ref('users').child(user.uid).once('value', snapshot => {
+          if (!snapshot.exists()) {
+            return dispatch('createUser', {id: user.uid, name: user.displayName, email: user.email, username: user.email, avatar: user.photoURL})
+              .then(() => dispatch('fetchAuthUser'))
+              .catch(error => alert(error.message))
+          }
+        })
+      })
   },
   signOut ({commit}) {
     return firebase.auth().signOut()

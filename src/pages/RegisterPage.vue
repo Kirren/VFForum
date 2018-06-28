@@ -43,7 +43,7 @@
           <b-form-group class="text-center mb-0">
             <b-button-group>
               <b-button type="submit" variant="info">Register</b-button>
-              <b-button variant="danger">Sign up with Google</b-button>
+              <b-button variant="danger" @click="registerWithGoogle">Sign up with Google</b-button>
             </b-button-group>
           </b-form-group>
 
@@ -71,6 +71,12 @@
       register () {
         this.$store.dispatch('registerUserWithEmailAndPassword', this.form)
           .then(() => this.$router.push('/'))
+          .catch(error => alert('🤷‍️' + error.message))
+      },
+      registerWithGoogle () {
+        this.$store.dispatch('signInWithGoogle')
+          .then(() => this.$router.push('/'))
+          .catch(error => alert('🤷‍️' + error.message))
       }
     },
     created () {

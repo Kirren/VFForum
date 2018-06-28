@@ -21,7 +21,11 @@
           </b-form-group>
 
           <b-form-group class="text-center">
-            <b-button type="submit" variant="info" class="btn-block">Sign in</b-button>
+            <b-button type="submit"
+                      variant="info"
+                      class="btn-block">
+              Sign in
+            </b-button>
           </b-form-group>
           <div class="text-right">
             <router-link :to="{name: 'RegisterPage'}">
@@ -33,7 +37,9 @@
       </b-form>
 
       <div class="text-center">
-        <b-button variant="danger" size="sm">
+        <b-button variant="danger"
+                  size="sm"
+                  @click="signInWithGoogle">
           <i class="fa fa-google fa-btn"></i>
           Sign in with Google
         </b-button>
@@ -61,7 +67,12 @@
           password: this.form.password
         })
           .then(() => this.$router.push('/'))
-          .catch((error) => alert(error.message))
+          .catch(error => alert('🤷‍️' + error.message))
+      },
+      signInWithGoogle () {
+        this.$store.dispatch('signInWithGoogle')
+          .then(() => this.$router.push('/'))
+          .catch(error => alert('🤷‍️' + error.message))
       }
     },
     created () {

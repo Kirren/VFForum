@@ -33,18 +33,14 @@ firebase.initializeApp(config)
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     store.dispatch('fetchAuthUser')
-  } else {
-    store.commit('setAuthId', null)
   }
 })
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
   template: '<App/>',
-  components: { App },
-  beforeCreate () {
-    store.dispatch('fetchUser', {id: store.state.authId})
-  }
+  components: { App }
 })

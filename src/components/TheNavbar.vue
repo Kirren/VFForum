@@ -14,8 +14,12 @@
         <b-navbar-nav v-if="user" class="ml-auto">
           <b-nav-item-dropdown :text="user.name" right>
             <b-dropdown-item :to="{name: 'ProfilePage', props: {id: user.id}}">View profile</b-dropdown-item>
-            <b-dropdown-item href="#">Log out</b-dropdown-item>
+            <b-dropdown-item @click="signOut">Log out</b-dropdown-item>
           </b-nav-item-dropdown>
+        </b-navbar-nav>
+        <b-navbar-nav v-else class="ml-auto">
+          <b-nav-item :to="{name: 'RegisterPage'}">Register</b-nav-item>
+          <b-nav-item :to="{name: 'SignInPage'}">Sign In</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
 		</b-navbar>
@@ -31,6 +35,12 @@
       ...mapGetters({
         'user': 'authUser'
       })
+    },
+    methods: {
+      signOut () {
+        this.$store.dispatch('signOut')
+          .then(() => this.$router.push('/'))
+      }
     }
   }
 </script>

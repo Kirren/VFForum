@@ -8,6 +8,7 @@ import EditThreadPage from '@/pages/EditThreadPage'
 import CreateThreadPage from '@/pages/CreateThreadPage'
 import ProfilePage from '@/pages/ProfilePage'
 import RegisterPage from '@/pages/RegisterPage'
+import SignInPage from '@/pages/SignInPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 Vue.use(Router)
@@ -65,6 +66,12 @@ export default new Router({
       path: '/register',
       name: 'RegisterPage',
       component: RegisterPage,
+      props: true
+    },
+    {
+      path: '/signin',
+      name: 'SignInPage',
+      component: SignInPage,
       props: true
     },
     {

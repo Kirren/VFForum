@@ -31,10 +31,6 @@
     name: 'ProfilePage',
     components: {ProfileEditor, ProfileCard, PostList},
     props: {
-      id: {
-        required: true,
-        type: String
-      },
       edit: {
         type: Boolean,
         default: false
@@ -51,6 +47,9 @@
         }
         return []
       }
+    },
+    created () {
+      this.$emit('ready')
     }
   }
 </script>

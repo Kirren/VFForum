@@ -87,9 +87,11 @@ export default {
       .then(user => {
         return dispatch('createUser', {id: user.user.uid, email, name, username, password, avatar})
       })
+      .catch(error => alert(error.message))
   },
   signInWithEmailAndPassword ({context}, {email, password}) {
     return firebase.auth().signInWithEmailAndPassword(email, password)
+      .catch(error => alert(error.message))
   },
   signOut ({commit}) {
     return firebase.auth().signOut()

@@ -12,6 +12,10 @@
           <b-nav-item class="d-none d-sm-block d-md-none" href="#">Logout</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav v-if="user" class="ml-auto">
+          <b-img v-if="user.avatar"
+                 :src="user.avatar"
+                 rounded="circle"
+                 width="40" height="40"/>
           <b-nav-item-dropdown :text="user.name" right>
             <b-dropdown-item :to="{name: 'ProfilePage'}">View profile</b-dropdown-item>
             <b-dropdown-item @click="signOut">Log out</b-dropdown-item>

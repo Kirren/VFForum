@@ -33,6 +33,8 @@ firebase.initializeApp(config)
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     store.dispatch('fetchAuthUser')
+  } else {
+    store.dispatch('setAuthId', null)
   }
 })
 /* eslint-disable no-new */

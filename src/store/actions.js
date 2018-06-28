@@ -88,6 +88,13 @@ export default {
         return dispatch('createUser', {id: user.user.uid, email, name, username, password, avatar})
       })
   },
+  signInWithEmailAndPassword ({context}, {email, password}) {
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+  },
+  signOut ({commit}) {
+    return firebase.auth().signOut()
+      .then(() => commit('setAuthId', null))
+  },
   createPost ({commit, state}, post) {
     const postId = firebase.database().ref('posts').push().key
     post.userId = state.authId

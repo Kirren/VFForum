@@ -2,47 +2,52 @@
   <b-row class="justify-content-center">
     <b-col cols="12" md="6">
       <b-form @submit.prevent="register">
-        <h1 class="text-center">Register</h1>
+        <b-card>
+          <h1 class="text-center">Register</h1>
 
-        <b-form-group label="Full Name"
-                      label-for="name">
-          <b-form-input v-model="form.name"
-                        id="name"
-                        type="text"/>
-        </b-form-group>
+          <b-form-group label="Full Name"
+                        label-for="name">
+            <b-form-input v-model="form.name"
+                          id="name"
+                          type="text"/>
+          </b-form-group>
 
-        <b-form-group label="Username"
-                      label-for="username">
-          <b-form-input v-model="form.username"
-                        id="username"
-                        type="text"/>
-        </b-form-group>
+          <b-form-group label="Username"
+                        label-for="username">
+            <b-form-input v-model="form.username"
+                          id="username"
+                          type="text"/>
+          </b-form-group>
 
-        <b-form-group label="Email"
-                      label-for="email">
-          <b-form-input v-model="form.email"
-                        id="email"
-                        type="email"/>
-        </b-form-group>
+          <b-form-group label="Email"
+                        label-for="email">
+            <b-form-input v-model="form.email"
+                          id="email"
+                          type="email"/>
+          </b-form-group>
 
-        <b-form-group label="Password"
-                      label-for="email">
-          <b-form-input v-model="form.password"
-                        id="password"
-                        type="password"/>
-        </b-form-group>
+          <b-form-group label="Password"
+                        label-for="email">
+            <b-form-input v-model="form.password"
+                          id="password"
+                          type="password"/>
+          </b-form-group>
 
-        <b-form-group label="Avatar"
-                      label-for="avatar">
-          <b-form-input v-model="form.avatar"
-                        id="avatar"
-                        type="text"/>
-        </b-form-group>
+          <b-form-group label="Avatar"
+                        label-for="avatar">
+            <b-form-input v-model="form.avatar"
+                          id="avatar"
+                          type="text"/>
+          </b-form-group>
 
-        <b-button-group class="text-center">
-          <b-button type="submit" variant="info">Register</b-button>
-          <b-button variant="danger">Sign up with Google</b-button>
-        </b-button-group>
+          <b-form-group class="text-center mb-0">
+            <b-button-group>
+              <b-button type="submit" variant="info">Register</b-button>
+              <b-button variant="danger">Sign up with Google</b-button>
+            </b-button-group>
+          </b-form-group>
+
+        </b-card>
       </b-form>
     </b-col>
   </b-row>

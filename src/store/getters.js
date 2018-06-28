@@ -2,7 +2,7 @@ import {countObjectLength} from '../helpers'
 
 export default {
   authUser (state) {
-    return state.users[state.authId]
+    return state.authId ? state.users[state.authId] : null
   },
   userThreadsCount: state => id => countObjectLength(state.users[id].threads),
   userPostsCount: state => id => countObjectLength(state.users[id].posts),

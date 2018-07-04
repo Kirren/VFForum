@@ -17,8 +17,8 @@
                  rounded="circle"
                  width="40" height="40"/>
           <b-nav-item-dropdown :text="user.name" right>
-            <b-dropdown-item :to="{name: 'ProfilePage'}">View profile</b-dropdown-item>
-            <b-dropdown-item @click="signOut">Log out</b-dropdown-item>
+            <b-dropdown-item :to="{name: 'ProfilePage'}">View Profile</b-dropdown-item>
+            <b-dropdown-item :to="{name: 'SignOut'}">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
         <b-navbar-nav v-else class="ml-auto">
@@ -39,12 +39,6 @@
       ...mapGetters({
         'user': 'authUser'
       })
-    },
-    methods: {
-      signOut () {
-        this.$store.dispatch('signOut')
-          .then(() => this.$router.push('/'))
-      }
     }
   }
 </script>

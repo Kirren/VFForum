@@ -84,6 +84,14 @@ export default new Router({
       props: true
     },
     {
+      path: '/signout',
+      name: 'SignOut',
+      beforeEnter (to, from, next) {
+        Store.dispatch('signOut')
+          .then(() => next({name: 'HomePage'}))
+      }
+    },
+    {
       path: '*',
       name: 'NotFoundPage',
       component: NotFoundPage

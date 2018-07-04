@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Store from '@/store'
+
 import HomePage from '@/pages/HomePage'
 import CategoryPage from '@/pages/CategoryPage'
 import ForumPage from '@/pages/ForumPage'
@@ -54,7 +56,14 @@ export default new Router({
       path: '/me',
       name: 'ProfilePage',
       component: ProfilePage,
-      props: true
+      props: true,
+      beforeEnter (to, from, next) {
+        if (Store.state.authId) {
+          next()
+        } else {
+          next({name: 'HomePage'})
+        }
+      }
     },
     {
       path: '/me/edit',

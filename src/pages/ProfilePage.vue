@@ -27,7 +27,6 @@
   import PostList from '@/components/PostList'
   import ProfileCard from '@/components/ProfileCard'
   import ProfileEditor from '@/components/ProfileEditor'
-  import store from '@/store'
 
   export default {
     name: 'ProfilePage',
@@ -52,14 +51,6 @@
     },
     created () {
       this.$emit('ready')
-    },
-    beforeRouteEnter (to, from, next) {
-      alert(store.state.authId)
-      if (store.state.authId) {
-        next()
-      } else {
-        next({name: 'HomePage'})
-      }
     }
   }
 </script>

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-row>
+    <h1>WORKED</h1>
+    <!--<b-row>
       <ProfileEditor v-if="edit" :user="user"/>
       <ProfileCard v-else :user="user"/>
 
@@ -16,7 +17,7 @@
         <hr class="d-none d-lg-block">
         <PostList :posts="userPosts"/>
       </b-col>
-    </b-row>
+    </b-row>-->
   </div>
 </template>
 
@@ -26,6 +27,7 @@
   import PostList from '@/components/PostList'
   import ProfileCard from '@/components/ProfileCard'
   import ProfileEditor from '@/components/ProfileEditor'
+  import store from '@/store'
 
   export default {
     name: 'ProfilePage',
@@ -50,6 +52,14 @@
     },
     created () {
       this.$emit('ready')
+    },
+    beforeRouteEnter (to, from, next) {
+      alert(store.state.authId)
+      if (store.state.authId) {
+        next()
+      } else {
+        next({name: 'HomePage'})
+      }
     }
   }
 </script>

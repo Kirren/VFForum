@@ -76,9 +76,6 @@
     mounted () {
       this.initialTitle = this.thread.title
       this.initialText = this.text
-
-      console.log(this.initialTitle)
-      console.log(this.initialText)
     },
     beforeRouteLeave (to, from, next) {
       if (this.hasUnsavedChanges) {

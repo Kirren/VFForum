@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Store from '@/store'
+import store from '@/store'
 
 import HomePage from '@/pages/HomePage'
 import CategoryPage from '@/pages/CategoryPage'
@@ -58,11 +58,7 @@ export default new Router({
       component: ProfilePage,
       props: true,
       beforeEnter (to, from, next) {
-        if (Store.state.authId) {
-          next()
-        } else {
-          next({name: 'HomePage'})
-        }
+        store.state.authId ? next() : next({name: 'HomePage'})
       }
     },
     {
@@ -87,7 +83,7 @@ export default new Router({
       path: '/signout',
       name: 'SignOut',
       beforeEnter (to, from, next) {
-        Store.dispatch('signOut')
+        store.dispatch('signOut')
           .then(() => next({name: 'HomePage'}))
       }
     },

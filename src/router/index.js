@@ -15,7 +15,7 @@ import NotFoundPage from '@/pages/NotFoundPage'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -57,9 +57,7 @@ export default new Router({
       name: 'ProfilePage',
       component: ProfilePage,
       props: true,
-      beforeEnter (to, from, next) {
-        store.state.authId ? next() : next({name: 'HomePage'})
-      }
+      meta: { requiresAuth: true }
     },
     {
       path: '/me/edit',
@@ -95,3 +93,14 @@ export default new Router({
   ],
   mode: 'history'
 })
+
+router.beforeEach((to, from, next) => {
+  console.log(`navigating from ${from.name} to ${to.name}`)
+  if (to.matched.some(route => route.meta.requiresAuth)) {
+    store.state.authId ? next() : next({name: 'HomePage'});
+  } else {
+    next();
+  }
+})
+
+export default router

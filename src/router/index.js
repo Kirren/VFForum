@@ -97,9 +97,9 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   console.log(`navigating from ${from.name} to ${to.name}`)
   if (to.matched.some(route => route.meta.requiresAuth)) {
-    store.state.authId ? next() : next({name: 'HomePage'});
+    store.state.authId ? next() : next({name: 'HomePage'})
   } else {
-    next();
+    next()
   }
 })
 

@@ -29,12 +29,16 @@
       </b-col>
     </b-row>
     <PostList :posts="posts"/>
-    <PostEditor :threadId="id"/>
+    <PostEditor v-if="authUser" :threadId="id"/>
+    <div v-else class="text-center mb-4">
+      <router-link :to="{name: 'SignInPage', query: {redirectTo: $route.path}}">Sign In</router-link> or
+      <router-link :to="{name: 'RegisterPage', query: {redirectTo: $route.path}}">Register</router-link> to post a reply
+    </div>
   </div>
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import PostList from '@/components/PostList'
   import PostEditor from '@/components/PostEditor'
   import {countObjectLength} from '@/helpers'
@@ -50,6 +54,9 @@
       }
     },
     computed: {
+      ...mapGetters({
+        authUser: 'authUser'
+      }),
       thread () {
         return this.$store.state.threads[this.id]
       },

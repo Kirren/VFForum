@@ -70,13 +70,17 @@
     methods: {
       register () {
         this.$store.dispatch('registerUserWithEmailAndPassword', this.form)
-          .then(() => this.$router.push('/'))
+          .then(() => this.successRedirect())
           .catch(error => alert('🤷‍️' + error.message))
       },
       registerWithGoogle () {
         this.$store.dispatch('signInWithGoogle')
-          .then(() => this.$router.push('/'))
+          .then(() => this.successRedirect())
           .catch(error => alert('🤷‍️' + error.message))
+      },
+      successRedirect () {
+        const redirectTo = this.$route.query.redirectTo || {name: 'HomePage'}
+        this.$router.push(redirectTo)
       }
     },
     created () {

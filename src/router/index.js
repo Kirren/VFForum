@@ -71,17 +71,20 @@ const router = new Router({
       path: '/register',
       name: 'RegisterPage',
       component: RegisterPage,
-      props: true
+      props: true,
+      meta: { requiresGuest: true }
     },
     {
       path: '/signin',
       name: 'SignInPage',
       component: SignInPage,
-      props: true
+      props: true,
+      meta: { requiresGuest: true }
     },
     {
       path: '/signout',
       name: 'SignOut',
+      meta: { requiresAuth: true },
       beforeEnter (to, from, next) {
         store.dispatch('signOut')
           .then(() => next({name: 'HomePage'}))
@@ -103,6 +106,12 @@ router.beforeEach((to, from, next) => {
     .then(user => {
       if (to.matched.some(route => route.meta.requiresAuth)) {
         if (user) {
+          next()
+        } else {
+          next({name: 'SignInPage'})
+        }
+      } else if (to.matched.some(route => route.meta.requiresGuest)) {
+        if (!user) {
           next()
         } else {
           next({name: 'HomePage'})

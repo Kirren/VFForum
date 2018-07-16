@@ -41,8 +41,8 @@
     components: { TheNavbar, Spinner },
     methods: {
       pageReady () {
-        this.showPage = true
         NProgress.done()
+        this.showPage = true
       }
     },
     created () {

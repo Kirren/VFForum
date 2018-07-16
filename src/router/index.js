@@ -38,7 +38,8 @@ const router = new Router({
       path: '/thread/new/:forumId',
       name: 'CreateThreadPage',
       component: CreateThreadPage,
-      props: true
+      props: true,
+      meta: { requiresAuth: true }
     },
     {
       path: '/thread/:id',
@@ -63,7 +64,8 @@ const router = new Router({
       path: '/me/edit',
       name: 'ProfileEditPage',
       component: ProfilePage,
-      props: {edit: true}
+      props: {edit: true},
+      meta: { requiresAuth: true }
     },
     {
       path: '/register',
@@ -96,11 +98,19 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   console.log(`navigating from ${from.name} to ${to.name}`)
-  if (to.matched.some(route => route.meta.requiresAuth)) {
-    store.state.authId ? next() : next({name: 'HomePage'})
-  } else {
-    next()
-  }
+
+  store.dispatch('initAuthentication')
+    .then(user => {
+      if (to.matched.some(route => route.meta.requiresAuth)) {
+        if (user) {
+          next()
+        } else {
+          next({name: 'HomePage'})
+        }
+      } else {
+        next()
+      }
+    })
 })
 
 export default router

@@ -1,6 +1,22 @@
 import firebase from 'firebase'
 
 export default {
+  initAuthentication ({dispatch, commit, state}) {
+    return new Promise((resolve, reject) => {
+      if (state.unsubscribeAuthObserver) {
+        state.unsubscribeAuthObserver()
+      }
+      const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          dispatch('fetchAuthUser')
+            .then(dbUser => resolve(dbUser))
+        } else {
+          resolve(null)
+        }
+      })
+      commit('setUnsubscribeAuthObserver', unsubscribe)
+    })
+  },
   createThread ({commit, state, dispatch}, {title, text, forumId}) {
     return new Promise((resolve, reject) => {
       const threadId = firebase.database().ref('threads').push().key

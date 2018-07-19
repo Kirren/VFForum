@@ -16,7 +16,7 @@
     </b-container>
     <b-container fluid>
       <b-row>
-        <router-view v-show="showPage" @ready="pageReady"
+        <router-view v-show="showPage" @ready="pageReady" :key="$route.path"
                      class="col-12 col-lg-11 col-xl-8 mx-auto"/>
         <div v-show="!showPage" class="col-12 text-center">
           <Spinner/>

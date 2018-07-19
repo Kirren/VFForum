@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>WORKED</h1>
-    <!--<b-row>
+    <b-row>
       <ProfileEditor v-if="edit" :user="user"/>
       <ProfileCard v-else :user="user"/>
 
@@ -17,7 +16,7 @@
         <hr class="d-none d-lg-block">
         <PostList :posts="userPosts"/>
       </b-col>
-    </b-row>-->
+    </b-row>
   </div>
 </template>
 
@@ -28,9 +27,12 @@
   import ProfileCard from '@/components/ProfileCard'
   import ProfileEditor from '@/components/ProfileEditor'
 
+  import dataLoader from '@/mixins/dataLoader'
+
   export default {
     name: 'ProfilePage',
     components: {ProfileEditor, ProfileCard, PostList},
+    mixins: [dataLoader],
     props: {
       edit: {
         type: Boolean,
@@ -42,15 +44,14 @@
         user: 'authUser'
       }),
       userPosts () {
-        if (this.user.posts) {
-          return Object.values(this.$store.state.posts)
-            .filter(post => post.userId === this.user['.key'])
-        }
-        return []
+        return this.$store.getters.userPosts(this.user['.key'])
       }
     },
     created () {
-      this.$emit('ready')
+      this.$store.dispatch('fetchPosts', {ids: this.user.posts})
+        .then(() => {
+          this.dataFetched()
+        })
     }
   }
 </script>

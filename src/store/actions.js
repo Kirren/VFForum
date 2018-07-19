@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import { removeEmptyProps } from '../helpers'
 
 export default {
   initAuthentication ({dispatch, commit, state}) {
@@ -189,7 +190,22 @@ export default {
     })
   },
   updateUser ({commit}, user) {
-    commit('setUser', {user, userId: user['.key']})
+    const updates = {
+      avatar: user.avatar,
+      username: user.username,
+      name: user.name,
+      bio: user.bio,
+      website: user.website,
+      email: user.email,
+      location: user.location
+    }
+    return new Promise((resolve, reject) => {
+      firebase.database().ref('users').child(user['.key']).update(removeEmptyProps(updates))
+        .then(() => {
+          commit('setUser', {user, userId: user['.key']})
+          resolve(user)
+        })
+    })
   },
   fetchData: ({state, commit}, {id, resource}) => {
     return new Promise((resolve, reject) => {

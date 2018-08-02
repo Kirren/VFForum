@@ -54,7 +54,7 @@
     },
     computed: {
       thread () {
-        return this.$store.state.threads['.key']
+        return this.$store.state.threads.all['.key']
       },
       isUpdate () {
         return !!this.title

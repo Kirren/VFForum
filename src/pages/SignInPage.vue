@@ -62,15 +62,15 @@
     },
     methods: {
       signIn () {
-        this.$store.dispatch('signInWithEmailAndPassword', {
+        this.$store.dispatch('auth/signInWithEmailAndPassword', {
           email: this.form.email,
           password: this.form.password
-        })
+        }, {root: true})
           .then(() => this.successRedirect())
           .catch(error => alert('🤷‍️' + error.message))
       },
       signInWithGoogle () {
-        this.$store.dispatch('signInWithGoogle')
+        this.$store.dispatch('auth/signInWithGoogle')
           .then(() => this.successRedirect())
           .catch(error => alert('🤷‍️' + error.message))
       },

@@ -94,16 +94,16 @@
     },
     computed: {
       userPostsCount () {
-        return this.$store.getters.userPostsCount(this.user['.key'])
+        return this.$store.getters['users/userPostsCount'](this.user['.key'])
       },
       userThreadsCount () {
-        return this.$store.getters.userThreadsCount(this.user['.key'])
+        return this.$store.getters['users/userThreadsCount'](this.user['.key'])
       }
     },
     methods: {
       save () {
         this.$router.push({name: 'ProfilePage'})
-        this.$store.dispatch('updateUser', {...this.activeUser})
+        this.$store.dispatch('users/updateUser', {...this.activeUser})
       },
       cancel () {
         this.$router.push({name: 'ProfilePage'})

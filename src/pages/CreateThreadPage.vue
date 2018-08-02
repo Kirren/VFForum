@@ -31,14 +31,16 @@
     },
     computed: {
       forum () {
-        return this.$store.state.forums[this.forumId]
+        return this.$store.state.forums.all[this.forumId]
       },
       hasUnsavedChanges () {
         return (this.$refs.editor.form.title || this.$refs.editor.form.text) && !this.saved
       }
     },
     methods: {
-      ...mapActions(['createThread', 'fetchForum']),
+      ...mapActions('threads', ['createThread']),
+      ...mapActions('forums', ['fetchForum']),
+      ...mapActions('users', ['fetchUser']),
       save ({title, text}) {
         this.createThread({
           forumId: this.forum['.key'],

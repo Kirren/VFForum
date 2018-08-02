@@ -48,15 +48,17 @@
     },
     computed: {
       forum () {
-        return this.$store.state.forums[this.id]
+        return this.$store.state.forums.all[this.id]
       },
       threads () {
-        return Object.values(this.$store.state.threads)
+        return Object.values(this.$store.state.threads.all)
           .filter(thread => thread.forumId === this.id)
       }
     },
     methods: {
-      ...mapActions(['fetchForum', 'fetchThreads', 'fetchUser'])
+      ...mapActions('forums', ['fetchForum']),
+      ...mapActions('threads', ['fetchThreads']),
+      ...mapActions('users', ['fetchUser'])
     },
     created () {
       this.fetchForum({id: this.id})

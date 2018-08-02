@@ -55,28 +55,30 @@
     },
     computed: {
       ...mapGetters({
-        authUser: 'authUser'
+        authUser: 'auth/authUser'
       }),
       thread () {
-        return this.$store.state.threads[this.id]
+        return this.$store.state.threads.all[this.id]
       },
       user () {
-        return this.$store.state.users[this.thread.userId]
+        return this.$store.state.users.all[this.thread.userId]
       },
       posts () {
         const postIds = Object.values(this.thread.posts)
-        return Object.values(this.$store.state.posts)
+        return Object.values(this.$store.state.posts.all)
           .filter(post => postIds.includes(post['.key']))
       },
       contributorsAmount () {
         return countObjectLength(this.thread.contributors)
       },
       repliesAmount () {
-        return this.$store.getters.threadRepliesCount(this.thread['.key'])
+        return this.$store.getters['threads/threadRepliesCount'](this.thread['.key'])
       }
     },
     methods: {
-      ...mapActions(['fetchThread', 'fetchUser', 'fetchPosts', 'fetchUser'])
+      ...mapActions('threads', ['fetchThread']),
+      ...mapActions('posts', ['fetchPosts']),
+      ...mapActions('users', ['fetchUser'])
     },
     created () {
       this.fetchThread({id: this.id})

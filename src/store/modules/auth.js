@@ -18,7 +18,7 @@ export default {
       return new Promise((resolve, reject) => {
         firebase.database().ref('users').child(userId).once('value', snapshot => {
           if (snapshot.exists()) {
-            return dispatch('fetchUser', {id: userId}, {root: true})
+            return dispatch('users/fetchUser', {id: userId}, {root: true})
               .then(user => {
                 commit('setAuthId', userId)
                 resolve(user)

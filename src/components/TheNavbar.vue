@@ -9,7 +9,7 @@
           <b-nav-item href="#">Forum</b-nav-item>
           <b-nav-item href="#">Thread</b-nav-item>
           <b-nav-item class="d-none d-sm-block d-md-none" href="#">My Profile</b-nav-item>
-          <b-nav-item class="d-none d-sm-block d-md-none" href="#">Logout</b-nav-item>
+          <b-nav-item class="d-none d-sm-block d-md-none" :to="{name: 'SignOut'}">Sign Out</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav v-if="user" class="ml-auto">
           <b-img v-if="user.avatar"
@@ -37,7 +37,7 @@
     name: 'TheNavbar',
     computed: {
       ...mapGetters({
-        'user': 'authUser'
+        'user': 'auth/authUser'
       })
     }
   }

@@ -9,8 +9,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     categories: {},
-    forums: {},
-    threads: {},
     posts: {},
     users: {},
     authId: null,

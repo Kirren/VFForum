@@ -1,6 +1,7 @@
 import { makeAppendChildToParentMutation } from '../storeHelpers'
 
 export default {
+  namespaced: true,
   state: {
     all: {}
   },

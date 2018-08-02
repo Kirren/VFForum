@@ -11,10 +11,10 @@ export default {
   },
   getters: {
     userThreadsCount: state => id => countObjectLength(state.all[id].threads),
-    userPosts: state => id => {
+    userPosts: (state, getters, rootState) => id => {
       const user = state.all[id]
       if (user.posts) {
-        return Object.values(state.posts)
+        return Object.values(rootState.posts.all)
           .filter(post => post.userId === id)
       }
       return []
@@ -32,7 +32,7 @@ export default {
 
         firebase.database().ref('users').child(id).set(user)
           .then(() => {
-            commit('setData', {resource: 'users', id: id, item: user})
+            commit('setData', {resource: 'users', id: id, item: user}, {root: true})
             resolve(state.all[id])
           })
       })
@@ -56,8 +56,8 @@ export default {
       })
     },
 
-    fetchUser: ({dispatch}, {id}) => dispatch('fetchData', {id, resource: 'users'}),
-    fetchUsers: ({dispatch}, {ids}) => dispatch('fetchDataArray', {ids, resource: 'users'})
+    fetchUser: ({dispatch}, {id}) => dispatch('fetchData', {id, resource: 'users'}, {root: true}),
+    fetchUsers: ({dispatch}, {ids}) => dispatch('fetchDataArray', {ids, resource: 'users'}, {root: true})
   },
   mutations: {
     setUser (state, {user, userId}) {

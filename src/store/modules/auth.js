@@ -7,9 +7,9 @@ export default {
     unsubscribeAuthObserver: null
   },
   getters: {
-    authUser (state) {
-      return state.authId ? state.users[state.authId] : null
-    },
+    authUser (state, getters, rootState) {
+      return state.authId ? rootState.users.all[state.authId] : null
+    }
   },
   actions: {
     fetchAuthUser ({dispatch, commit}) {
@@ -18,7 +18,7 @@ export default {
       return new Promise((resolve, reject) => {
         firebase.database().ref('users').child(userId).once('value', snapshot => {
           if (snapshot.exists()) {
-            return dispatch('fetchUser', {id: userId})
+            return dispatch('fetchUser', {id: userId}, {root: true})
               .then(user => {
                 commit('setAuthId', userId)
                 resolve(user)
@@ -49,14 +49,14 @@ export default {
       return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(data => {
           console.log(data)
-          return dispatch('createUser', {
+          return dispatch('users/createUser', {
             id: data.user.uid,
             email,
             name,
             username,
             password,
             avatar
-          })
+          }, {root: true})
         })
         .then(() => dispatch('fetchAuthUser'))
         .catch(error => alert(error.message))
@@ -75,7 +75,13 @@ export default {
 
           firebase.database().ref('users').child(user.uid).once('value', snapshot => {
             if (!snapshot.exists()) {
-              return dispatch('createUser', {id: user.uid, name: user.displayName, email: user.email, username: user.email, avatar: user.photoURL})
+              return dispatch('users/createUser', {
+                id: user.uid,
+                name: user.displayName,
+                email: user.email,
+                username: user.email,
+                avatar: user.photoURL
+              }, {root: true})
                 .then(() => dispatch('fetchAuthUser'))
                 .catch(error => alert(error.message))
             }

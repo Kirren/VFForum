@@ -7,8 +7,8 @@ export default {
   },
   getters: {},
   actions: {
-    fetchForum: ({dispatch}, {id}) => dispatch('fetchData', {id, resource: 'forums'}),
-    fetchForums: ({dispatch}, {ids}) => dispatch('fetchDataArray', {ids, resource: 'forums'})
+    fetchForum: ({dispatch}, {id}) => dispatch('fetchData', {id, resource: 'forums'}, {root: true}),
+    fetchForums: ({dispatch}, {ids}) => dispatch('fetchDataArray', {ids, resource: 'forums'}, {root: true})
   },
   mutations: {
     appendThreadToForum: makeAppendChildToParentMutation({parent: 'forums', child: 'threads'})

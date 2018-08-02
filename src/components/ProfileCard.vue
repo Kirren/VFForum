@@ -4,7 +4,7 @@
       <b-col>
         <p>
           <b-img fluid
-                 :src="user.avatar"
+                 :src="userAvatar"
                  alt=""/>
         </p>
       </b-col>
@@ -40,9 +40,9 @@
     </b-row>
     <b-card class="text-center d-none d-lg-block">
       <p>
-        <b-img fluid
-               :src="user.avatar"
-               alt=""/>
+        <b-img fluid alt=""
+               :src="userAvatar"
+               height="300" width="300"/>
       </p>
       <h1>{{user.username}}</h1>
       <p>{{user.name}}</p>
@@ -85,6 +85,11 @@
       }
     },
     computed: {
+      userAvatar () {
+        console.log(this.user.avatar.length)
+        const defaultAvatar = 'https://redbanksmilesnj.com/wp-content/uploads/2015/11/female-avatar-placeholder.png'
+        return (this.user.avatar.length > 0) ? this.user.avatar : defaultAvatar
+      },
       userPostsCount () {
         return this.$store.getters['users/userPostsCount'](this.user['.key'])
       },

@@ -5,11 +5,13 @@ import { makeAppendChildToParentMutation } from '../storeHelpers'
 import { countObjectLength } from '../../helpers'
 
 export default {
+  namespaced: true,
   state: {
     all: {}
   },
   getters: {
-    threadRepliesCount: state => id => countObjectLength(state.all[id].posts) - 1
+    threadRepliesCount: state => id => countObjectLength(state.all[id].posts) - 1,
+    threadContributorsCount: state => id => countObjectLength(state.all[id].contributors) - 1
   },
   actions: {
     createThread ({commit, state, dispatch}, {title, text, forumId}) {

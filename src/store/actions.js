@@ -10,7 +10,10 @@ export default {
     })
   },
   fetchDataArray: ({dispatch}, {ids, resource}) => {
-    ids = Array.isArray(ids) ? ids : Object.keys(ids)
-    return Promise.all(ids.map(id => dispatch('fetchData', {id, resource})))
+    if (ids) {
+      ids = Array.isArray(ids) ? ids : Object.keys(ids)
+      return Promise.all(ids.map(id => dispatch('fetchData', {id, resource})))
+    }
+    return null
   }
 }
